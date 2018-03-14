@@ -1,0 +1,65 @@
+.row
+    .col-md-12
+        .form-group
+            label Profile Image
+            div
+                button.btn.btn-info.btn-sm.mar-bot-5(v-if='filesLoader.fm_profile_img' disabled='disabled')
+                    i.fa.fa-refresh.fa-spin.fa-fw
+                template(v-else)
+                    input.form-control.change_file.hidden(type='file' name='fm_profile_img' id='fm_profile_img')
+                    a.btn.btn-info.btn-sm.mar-bot-5(v-bind:href="filesURLS.fm_profile_img" target='_blank' v-if='!filesLoader.fm_profile_img && filesURLS.fm_profile_img !== ""')
+                        i.fa.fa-eye
+                    button.btn.btn-danger.btn-sm.mar-bot-5(v-if='!filesLoader.fm_profile_img && filesURLS.fm_profile_img === ""' disabled='disabled')
+                        i.fa.fa-exclamation
+                    button.btn.btn-success.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='change_img_trigger("fm_profile_img")') Change Image
+                    template(v-if='formFilesData.fm_profile_img !== null')
+                        button.btn.btn-success.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='upload_img("fm_profile_img")') Upload
+                        button.btn.btn-danger.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='cancel_img("fm_profile_img")') Cancel
+    .col-md-12
+        .form-group
+            label Scanned CNIC
+            div
+                button.btn.btn-info.btn-sm.mar-bot-5(v-if='filesLoader.fm_cnic_img' disabled='disabled')
+                    i.fa.fa-refresh.fa-spin.fa-fw
+                template(v-else)
+                    input.form-control.change_file.hidden(type='file' name='fm_cnic_img' id='fm_cnic_img')
+                    a.btn.btn-info.btn-sm.mar-bot-5(v-bind:href="filesURLS.fm_cnic_img" target='_blank' v-if='!filesLoader.fm_cnic_img && filesURLS.fm_cnic_img !== ""')
+                        i.fa.fa-eye
+                    button.btn.btn-danger.btn-sm.mar-bot-5(v-if='!filesLoader.fm_cnic_img && filesURLS.fm_cnic_img === ""' disabled='disabled')
+                        i.fa.fa-exclamation
+                    button.btn.btn-success.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='change_img_trigger("fm_cnic_img")') Change Image
+                    template(v-if='formFilesData.fm_cnic_img !== null')
+                        button.btn.btn-success.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='upload_img("fm_cnic_img")') Upload
+                        button.btn.btn-danger.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='cancel_img("fm_cnic_img")') Cancel
+    .col-md-12
+        .form-group
+            label Scanned License
+            div
+                button.btn.btn-info.btn-sm.mar-bot-5(v-if='filesLoader.fm_license_img' disabled='disabled')
+                    i.fa.fa-refresh.fa-spin.fa-fw
+                template(v-else)
+                    input.form-control.change_file.hidden(type='file' name='fm_license_img' id='fm_license_img')
+                    a.btn.btn-info.btn-sm.mar-bot-5(v-bind:href="filesURLS.fm_license_img" target='_blank' v-if='!filesLoader.fm_license_img && filesURLS.fm_license_img !== ""')
+                        i.fa.fa-eye
+                    button.btn.btn-danger.btn-sm.mar-bot-5(v-if='!filesLoader.fm_license_img && filesURLS.fm_license_img === ""' disabled='disabled')
+                        i.fa.fa-exclamation
+                    button.btn.btn-success.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='change_img_trigger("fm_license_img")') Change Image
+                    template(v-if='formFilesData.fm_license_img !== null')
+                        button.btn.btn-success.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='upload_img("fm_license_img")') Upload
+                        button.btn.btn-danger.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='cancel_img("fm_license_img")') Cancel
+    .col-md-12
+        .form-group
+            label Scanned Registration Letter
+            div
+                button.btn.btn-info.btn-sm.mar-bot-5(v-if='filesLoader.fm_reg_letter_img' disabled='disabled')
+                    i.fa.fa-refresh.fa-spin.fa-fw
+                template(v-else)
+                    input.form-control.change_file.hidden(type='file' name='fm_reg_letter_img' id='fm_reg_letter_img')
+                    a.btn.btn-info.btn-sm.mar-bot-5(v-bind:href="filesURLS.fm_reg_letter_img" target='_blank' v-if='!filesLoader.fm_reg_letter_img && filesURLS.fm_reg_letter_img !== ""')
+                        i.fa.fa-eye
+                    button.btn.btn-danger.btn-sm.mar-bot-5(v-if='!filesLoader.fm_reg_letter_img && filesURLS.fm_reg_letter_img === ""' disabled='disabled')
+                        i.fa.fa-exclamation
+                    button.btn.btn-success.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='change_img_trigger("fm_reg_letter_img")') Change Image
+                    template(v-if='formFilesData.fm_reg_letter_img !== null')
+                        button.btn.btn-success.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='upload_img("fm_reg_letter_img")') Upload
+                        button.btn.btn-danger.btn-sm.mar-bot-5.mar-lf-5(v-on:click.prevent='cancel_img("fm_reg_letter_img")') Cancel

@@ -1,0 +1,88 @@
+// Left side column. contains the logo and sidebar
+aside.left-side.sidebar-offcanvas
+    // sidebar: style can be found in sidebar.less
+    section.sidebar
+        // Sidebar user panel
+        .user-panel
+            .pull-left.info
+                p Roadio admin
+                a(href='#')
+                    i.fa.fa-circle.text-success
+                    |  Online
+        // sidebar menu: : style can be found in sidebar.less
+        ul.sidebar-menu
+            li
+                router-link(to='/admin')
+                    i.fa.fa-dashboard
+                    span Dashboard
+            li.treeview
+                a(href='#')
+                    i.fa.fa-home
+                    span Adda
+                    i.fa.fa-angle-left.pull-right
+                ul.treeview-menu
+                    li
+                        router-link(to='/admin/adda/add')
+                            i.fa.fa-angle-double-right
+                            |  Add Adda
+                    li
+                        router-link(to='/admin/adda/list')
+                            i.fa.fa-angle-double-right
+                            |  Adda List
+            li
+                router-link(to='/admin/users')
+                    i.fa.fa-users
+                    span Users
+            li.treeview
+                a(href='#')
+                    i.fa.fa-users
+                    span Drivers
+                    i.fa.fa-angle-left.pull-right
+                ul.treeview-menu
+                    li
+                        router-link(to='/admin/drivers/add_driver')
+                            i.fa.fa-angle-double-right
+                            |  Add Driver
+                    li
+                        router-link(to='/admin/drivers')
+                            i.fa.fa-angle-double-right
+                            |  List Drivers
+
+            li.treeview
+                a(href='#')
+                    i.fa.fa-truck
+                    span Deliveries
+                    i.fa.fa-angle-left.pull-right
+                ul.treeview-menu
+                    li
+                        router-link(to='/admin/requests')
+                            i.fa.fa-angle-double-right
+                            |  New Requests
+                    li
+                        router-link(to='/admin/requests/completed')
+                            i.fa.fa-angle-double-right
+                            |  Completed
+            li.treeview
+                a(href='#')
+                    i.fa.fa-money
+                    span Reporting
+                    i.fa.fa-angle-left.pull-right
+                ul.treeview-menu
+                    li.treeview
+                        a(href='#')
+                            i.fa.fa-money
+                            span Accounts
+                            i.fa.fa-angle-left.pull-right
+                        ul.treeview-menu
+                            li
+                                router-link(to='/admin/accounts/user')
+                                    i.fa.fa-angle-double-right
+                                    | Users
+                            li
+                                router-link(to='/admin/accounts/driver')
+                                    i.fa.fa-angle-double-right
+                                    | Drivers
+            li
+                router-link(to='/admin/leaderboard')
+                    i.fa.fa-certificate
+                    span Leader Board

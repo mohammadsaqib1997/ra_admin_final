@@ -1,0 +1,63 @@
+extends ./../layouts/dashboard_layout
+
+block content
+    aside.right-side
+        section.content-header
+            h1 Driver Request
+            ol.breadcrumb
+                li
+                    a(href='/')
+                        i.fa.fa-dashboard
+                        |  Dashboard
+                li.active Driver Request
+        section.content
+            .row
+                .col-xs-12
+                    .box
+                        .box-header
+                            h3.box-title Add Driver
+                        .box-body
+                            div.table-responsive
+                                table.table.table-hover.table-click
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Drive Name
+                                            th Drive Email
+                                            th Mobile#
+                                            th Vehicle
+                                            th Created Time
+                                            th Action
+                                    tbody
+                                        - var i = 0;
+                                        each val, key in data
+                                            - i++
+                                            tr(data-url="/admin/drivers/profile/"+key)
+                                                td #{i}
+                                                td #{val.first_name} #{val.last_name}
+                                                td #{val.email}
+                                                td #{val.mob_no}
+                                                td #{val.vehicle}
+                                                td #{val.time}
+                                                td
+                                                    a(href='#').btn.btn-success.btn-xs Accept
+                                                    a(href='#',data-toggle='modal',data-target='#reject_modal').btn.btn-danger.btn-xs Reject
+
+                                        else
+                                            tr
+                                                td(colspan=7)
+                                                    | data not found
+                            #reject_modal.modal.fade.bs-example-modal-lg(role='dialog')
+                                .modal-dialog.modal-lg
+                                    // Modal content
+                                    .modal-content
+                                        .modal-header
+                                            button.close(type='button', data-dismiss='modal') ×
+                                            h4.modal-title Reject Reason
+                                        .modal-body
+                                            .form-group
+                                                textarea.form-control
+                                        .modal-footer
+                                            button.btn.btn-primary(type='submit') Send
+                                            button.btn.btn-default(type='button', data-dismiss='modal') Close
+

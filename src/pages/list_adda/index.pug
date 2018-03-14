@@ -1,0 +1,48 @@
+aside.right-side
+    section.content-header
+        h1 List Adda
+        ol.breadcrumb
+            li
+                router-link(to='/')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active List Adda
+    section.content
+        confirm_popup
+            h4 Are you sure! You want to delete this item!
+            template(slot="footer")
+                button.btn.btn-danger(type="button" v-on:click.prevent="removeItem") Confirm
+        .row
+            .col-xs-12
+                .box
+                    .box-header
+                        h3.box-title Adda
+                    .box-body.table-responsive
+                        div.text-center(v-if='dataLoad')
+                            i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                        h3.text-center(style='margin: 15px 0;' v-if='!dataLoad && data.length === 0')
+                            | No Data Found!
+                        template(v-if='!dataLoad && data.length > 0')
+                            .row
+                                .col-md-6
+                                    .table-responsive
+                                        table_comp(v-bind:per_page="10")
+                                            template(slot="thead")
+                                                tr
+                                                    th.small_cell S.No#
+                                                    th Adda Name
+                                                    th Actions
+                                            template(slot="tbody")
+                                                tr.view_row(v-for="(row, ind) in data" v-bind:data-id="row.id")
+                                                    td.small_cell {{ ind+1 }}
+                                                    td {{ toTitleCase(row.place_name) }}
+                                                    td
+                                                        button.btn.btn-danger.btn-sm(type='button' style="margin-right: 5px;" v-on:click.stop="showPopup(row.id)")
+                                                            i.fa.fa-trash-o
+                                                        button.btn.btn-danger.btn-sm(type='button' v-on:click.stop="moveEdit(row.id)")
+                                                            i.fa.fa-edit
+                                .col-md-6
+                                    h3 View Content
+                                    h4 Adda Name: {{ (viewData) ? toTitleCase(viewData.place_name):'' }}
+                                    h4 Location
+                                    #map

@@ -1,0 +1,15 @@
+# IntelliJ project files
+.idea
+
+node_modules
+#this folder upload using ftp
+config
+
+# Media ignore #this folder upload using ftp
+public/images
+public/video
+
+__*.*
+
+public/javascripts/vue_frameworks/app/*.js
+public/javascripts/vue_frameworks/app/*.css

@@ -1,0 +1,104 @@
+aside.right-side
+    section.content-header
+        h1 Completed Requests
+        ol.breadcrumb
+            li
+                router-link(to='/')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li Deliveries
+            li Completed Requests
+    section.content
+        .row
+            .col-xs-12
+                .box
+                    .box-header
+                        ul.nav.nav-tabs(role='tablist')
+                            li.active(role='tablist')
+                                a(href='#today' aria-controls='home' role='tab' data-toggle='tab') Today
+                            li(role='tablist')
+                                a(href='#week' aria-controls='home' role='tab' data-toggle='tab') Week
+                            li(role='tablist')
+                                a(href='#all' aria-controls='home' role='tab' data-toggle='tab') All
+                    .box-body
+                        div.tab-content
+                            div.tab-pane.active#today(role='tabpanel')
+                                div.table-responsive
+                                    div.text-center(v-if='dataLoad')
+                                        i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                    h3.text-center(style='margin: 15px 0;' v-if='!dataLoad && today.length === 0')
+                                        | No Data Found!
+                                    template(v-if='!dataLoad && today.length > 0')
+                                        table_comp(v-bind:per_page="10")
+                                            template(slot="thead")
+                                                tr
+                                                    th S.No#
+                                                    th Date
+                                                    th Origin
+                                                    th Destination
+                                                    th Distance
+                                                    th Duration
+                                                    //th Parcel
+                                                    th Vehicle Type
+                                            template(slot="tbody")
+                                                tr(v-for='(row, ind) in today')
+                                                    td {{ ind+1 }}
+                                                    td {{ row.createdAt }}
+                                                    td {{ row.orgText }}
+                                                    td {{ row.desText }}
+                                                    td {{ row.disText }}
+                                                    td {{ row.durText }}
+                                                    td {{ row.vecType }}
+                            div.tab-pane#week(role='tabpanel')
+                                div.table-responsive
+                                    div.text-center(v-if='dataLoad')
+                                        i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                    h3.text-center(style='margin: 15px 0;' v-if='!dataLoad && week.length === 0')
+                                        | No Data Found!
+                                    template(v-if='!dataLoad && week.length > 0')
+                                        table_comp(v-bind:per_page="10")
+                                            template(slot="thead")
+                                                tr
+                                                    th S.No#
+                                                    th Date
+                                                    th Origin
+                                                    th Destination
+                                                    th Distance
+                                                    th Duration
+                                                    //th Parcel
+                                                    th Vehicle Type
+                                            template(slot="tbody")
+                                                tr(v-for='(row, ind) in week')
+                                                    td {{ ind+1 }}
+                                                    td {{ row.createdAt }}
+                                                    td {{ row.orgText }}
+                                                    td {{ row.desText }}
+                                                    td {{ row.disText }}
+                                                    td {{ row.durText }}
+                                                    td {{ row.vecType }}
+                            div.tab-pane#all(role='tabpanel')
+                                div.table-responsive
+                                    div.text-center(v-if='dataLoad')
+                                        i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                    h3.text-center(style='margin: 15px 0;' v-if='!dataLoad && all.length === 0')
+                                        | No Data Found!
+                                    template(v-if='!dataLoad && all.length > 0')
+                                        table_comp(v-bind:per_page="10")
+                                            template(slot="thead")
+                                                tr
+                                                    th S.No#
+                                                    th Date
+                                                    th Origin
+                                                    th Destination
+                                                    th Distance
+                                                    th Duration
+                                                    th Vehicle Type
+                                            template(slot="tbody")
+                                                tr(v-for='(row, ind) in all')
+                                                    td {{ ind+1 }}
+                                                    td {{ row.createdAt }}
+                                                    td {{ row.orgText }}
+                                                    td {{ row.desText }}
+                                                    td {{ row.disText }}
+                                                    td {{ row.durText }}
+                                                    td {{ row.vecType }}

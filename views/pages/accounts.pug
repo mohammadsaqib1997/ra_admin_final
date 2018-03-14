@@ -1,0 +1,74 @@
+extends ./../layouts/dashboard_layout
+
+block content
+    aside.right-side
+        section.content-header
+            h1
+                | Payments&nbsp;
+                small Payments History
+            ol.breadcrumb
+                li
+                    a(href='/')
+                        i.fa.fa-dashboard
+                        |  Dashboard
+                li.active Payments
+        section.content
+            .row
+                .col-xs-12
+                    div.table-responsive
+                        table.table.table-hover.table-striped#example6
+                            thead
+                                tr
+                                    th Id
+                                    th Date
+                                    th Order#
+                                    th Vehicle tpe
+                                    th From
+                                    th To
+                                    th User
+                                    th Driver
+                                    th Distance
+                                    th Status
+                                    th Order Amount
+                            tbody
+                                tr
+                                    td 1
+                                    td 12-28-2101
+                                    td
+                                        a(href='') 234234
+                                    td car
+                                    td Jauhar
+                                    td Gulshan
+                                    td Ahmed
+                                    td Nabeel
+                                    td 44Km
+                                    td Pending
+                                    td Rs.4356
+                                tr
+                                    td 1
+                                    td 12-28-2101
+                                    td
+                                        a(href='') 234234
+                                    td car
+                                    td Jauhar
+                                    td Gulshan
+                                    td Ahmed
+                                    td Nabeel
+                                    td 44Km
+                                    td Completed
+                                    td Rs.4356
+                            tfoot
+                                tr
+                                    td
+                                    td
+                                    td
+                                    td
+                                    td
+                                    td
+                                    td
+                                    td
+                                    td
+                                    td Total
+                                    td Rs.23424234
+
+

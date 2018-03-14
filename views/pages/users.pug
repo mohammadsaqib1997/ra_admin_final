@@ -1,0 +1,60 @@
+extends ./../layouts/dashboard_layout
+
+block content
+    aside.right-side
+        section.content-header
+            h1
+                | Users&nbsp;
+                small Users List
+            ol.breadcrumb
+                li
+                    a(href='/')
+                        i.fa.fa-dashboard
+                        |  Dashboard
+                li.active Users
+        section.content
+            .row
+                .col-xs-12
+                    .box
+                        .box-header
+                            h3.box-title Users
+                            //.box-tools.text-right
+                            //    button.btn.btn-sm.btn-success
+                            //        i.fa.fa-plus
+                        .box-body
+                            if Object.keys(data).length > 0
+                                div.table-responsive
+                                    table.table.table-hover.table-click
+                                        thead
+                                            tr
+                                                th S.No#
+                                                th User Name
+                                                th Contact No.
+                                                th Created Time
+                                        tbody
+                                            - var i = 0;
+                                            each val, key in data
+                                                - i++
+                                                tr(data-url="/admin/users/profile/"+key)
+                                                    td #{i}
+                                                    td #{val.first_name} #{val.last_name}
+                                                    td #{val.mob_no}
+                                                    td #{val.time}
+                            else
+                                h3.text-danger.text-center No User Found!
+                        //if Object.keys(data).length > 0
+                        //    .box-footer
+                        //        .row
+                        //            .col-xs-offset-9.col-xs-3
+                        //                .btn-group.btn-group-justified
+                        //                    a.btn.btn-default
+                        //                        i.fa.fa-arrow-left
+                        //                    a.btn.btn-default 1
+                        //                    a.btn.btn-default 1
+                        //                    a.btn.btn-default 1
+                        //                    a.btn.btn-default 1
+                        //                    a.btn.btn-default
+                        //                        i.fa.fa-arrow-right
+                        //                h5.text-right Page 4
+
+

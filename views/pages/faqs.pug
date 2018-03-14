@@ -1,0 +1,352 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+
+        //facebook sharing content
+        meta(property="fb:app_id" content="1379317195528816")
+        meta(property="og:url" content="https://roadioapp.com/faqs")
+        meta(property="og:type" content="website")
+        meta(property="og:title" content="Roadioapp | FAQs")
+        meta(property="og:description" content="Saman bhejna ab hua asan Car, Suzuki ya Truck sirf ek button ki duri per.")
+        meta(property="og:image" content="https://roadioapp.com/images/fav_icon.png")
+
+        // SITE TITLE
+        title Roadioapp | FAQs
+        //
+          =========================
+          FAV AND TOUCH ICONS
+          ==============================
+        link(rel='icon', href='/images/fav_icon.png')
+        //link(rel='apple-touch-icon', href='images/apple-touch-icon.png')
+        //link(rel='apple-touch-icon', sizes='72x72', href='images/apple-touch-icon-72x72.png')
+        //link(rel='apple-touch-icon', sizes='114x114', href='images/apple-touch-icon-114x114.png')
+        //
+          =========================
+          STYLESHEETS
+          ==============================
+        // BOOTSTRAP
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        // FONT ICONS
+        link(rel='stylesheet', href='/stylesheets/assets/elegant-icons/style.css')
+        link(rel='stylesheet', href='/stylesheets/assets/app-icons/styles.css')
+        //if lte IE 7
+          script(src='lte-ie7.js')
+        // WEB FONTS
+        link(href='https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic', rel='stylesheet', type='text/css')
+        // CAROUSEL AND LIGHTBOX
+        link(rel='stylesheet', href='/stylesheets/css/owl.theme.css')
+        link(rel='stylesheet', href='/stylesheets/css/owl.carousel.css')
+        link(rel='stylesheet', href='/stylesheets/css/nivo-lightbox.css')
+        link(rel='stylesheet', href='/stylesheets/css/nivo_themes/default/default.css')
+        // ANIMATIONS
+        link(rel='stylesheet', href='/stylesheets/css/animate.min.css')
+        // CUSTOM STYLESHEETS
+        link(rel='stylesheet', href='/stylesheets/css/styles.css')
+        // COLORS
+        link(rel='stylesheet', href='/stylesheets/css/colors/blue.css')
+        // DEFAULT COLOR/ CURRENTLY USING
+        // <link rel="stylesheet" href="css/colors/red.css">
+        // <link rel="stylesheet" href="css/colors/green.css">
+        // <link rel="stylesheet" href="css/colors/purple.css">
+        // <link rel="stylesheet" href="css/colors/orange.css">
+        // <link rel="stylesheet" href="css/colors/blue-munsell.css">
+        // <link rel="stylesheet" href="css/colors/slate.css">
+        // <link rel="stylesheet" href="css/colors/yellow.css">
+        // RESPONSIVE FIXES
+        link(rel='stylesheet', href='/stylesheets/css/responsive.css')
+        style.
+            .panel-collapse {
+                color: #232323;
+            }
+            .panel-title>a {
+                text-decoration: none;
+                color: #232323;
+            }
+            .panel-collapse .panel-body ol li,
+            .panel-collapse .panel-body ul li
+            {
+                list-style: inherit;
+            }
+            .my-10{
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        //if lt IE 9
+          script(src='js/html5shiv.js')
+          script(src='js/respond.min.js')
+        // JQUERY
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    body
+        //
+          =========================
+          PRE LOADER
+          ==============================
+        //
+          =========================
+          HEADER
+          ==============================
+        header#home.header
+            // To make header full screen. Use .full-screen class with color overlay. Example: <div class="color-overlay full-screen">
+            // STICKY NAVIGATION
+            .navbar.navbar-inverse.bs-docs-nav.navbar-fixed-top.sticky-navigation
+                .container
+                    .navbar-header
+                        // LOGO ON STICKY NAV BAR
+                        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#kane-navigation')
+                            span.sr-only Toggle navigation
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        a.navbar-brand(href='#')
+                            img(src='/images/roadio_logo_web.png', alt='')
+                    // NAVIGATION LINKS
+                    #kane-navigation.navbar-collapse.collapse
+                        ul.nav.navbar-nav.navbar-right.main-navigation
+                            li
+                                a(href='/') Home
+                            li
+                                a(href='/') Features
+                            li
+                                a(href='/') Why Us?
+                            li
+                                a(href='/') About
+                            li
+                                a(href='/') Services
+                            li
+                                a(href='/') How to order
+                            li
+                                a(href='/') Download
+                            li
+                                a(href='/privacy') Privacy
+                            li
+                                a(href='/partner') Partner
+                            li
+                                a(href='/faqs') FAQs
+                // /END CONTAINER
+            // /END STICKY NAVIGATION
+            // CONTAINER
+
+
+        //
+          =========================
+          FEATURES
+          ==============================
+        section#features.features
+            .container.text-left.privacy-container
+                h3 DRIVERS QUESTIONS
+
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_1")
+                                    | 1. We also have the loaders as well so how can they earn kindly tell?
+                        #d_ques_1.panel-collapse.collapse
+                            .panel-body
+                                | When user post there job details, if user need labour so the user write on detail then so then driver bid on this job he decide the amount of the job then bid.
+
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_2")
+                                    | 2. Kindly tell me your requirements what you need for the registration process?
+                        #d_ques_2.panel-collapse.collapse
+                            .panel-body
+                                | Driver must provides these documents!
+                                ol
+                                    li Passport Size Photo
+                                    li Driving License
+                                    li Original CNIC
+                                    li Book Running Page
+                                    li Excise Page
+                                ul
+                                    h4 Terms
+                                    li For starting work with Roadio App you must have a Bike ,Suzuki or Mazda or Shehzor or a Truck.
+                                    li The Driver must visit one time in our office with complete document which we have mentioned above . And also we survey your vehicle and then verify.
+                                    li In our office we guide you how to use Roadio App in a simple way.
+                                    li We take just 5% commission from Driver and Driver can submit this Commission to our any branch Office. otherwise we take action and then block driver ID.
+                                    li And Driver must online on RoadioApp 24/7 and when client give job all the driver must bit on the job and must give response on the client.
+                                    li When driver bit on the client job so driver must finished the job as soon as possible earlier.
+                                    li User also give you ratings about our service. and for this you can take more jobs and earn more money then other low rated drivers. And also if you have lowest rating then (3.5 less then this rating) so we will block you ID. RoadioApp the Driver must take the responsibility to finish the job fast in a good way.
+
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_3")
+                                    | 3. Kindly tell me about the service you provide me?
+                        #d_ques_3.panel-collapse.collapse
+                            .panel-body
+                                ul
+                                    li RoadioApp is a Logistics service.
+                                    li In RoadioApp the client give the job to shifting the house Furniture and etc.
+                                    li User post request and driver accept the requests and bid the price of the job then give service.
+                                    li Which driver bid the minimum about in bid so he will get maximum rides.
+                                    li RoadioApp in two languages Urdu and English as well.
+
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_4")
+                                    | 4. Kindly tell me the benefits of your RoadioApp service?
+                        #d_ques_4.panel-collapse.collapse
+                            .panel-body
+                               | Now you take the job from your stops but if you use our RoadioApp service so you can get jobs from all over the city.
+
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_5")
+                                    | 5. Are you give insurance for my vehicle?
+                        #d_ques_5.panel-collapse.collapse
+                            .panel-body
+                                ul
+                                    li No our Company did not provide insurance we did not have that policy.
+                                    li You are the responsible about you vehicle.
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_6")
+                                    | 6. Is passenger cheated me so in this case Company provide the money?
+                        #d_ques_6.panel-collapse.collapse
+                            .panel-body
+                                ul
+                                    li Driver is responsible about this.
+                                    li Company is not responsible for this case.
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_7")
+                                    | 7. If any accident happen so company provide me any maintenance?
+                        #d_ques_7.panel-collapse.collapse
+                            .panel-body
+                                | No we don't.
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_8")
+                                    | 8. There is any guaranty for the regular jobs?
+                        #d_ques_8.panel-collapse.collapse
+                            .panel-body
+                                | If the driver give the best service to the clients so we try our level best to give that driver maximum task and opportunity to earn more money.
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_9")
+                                    | 9. How can we get high ratings?
+                        #d_ques_9.panel-collapse.collapse
+                            .panel-body
+                                ul
+                                    li If you provide the good service.
+                                    li Low rate charged.
+                                    li With out any problem deliver the equipment then user give good rating.
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_10")
+                                    | 10. Can you provide mobile insurance?
+                        #d_ques_10.panel-collapse.collapse
+                            .panel-body
+                                | RoadioApp didn't provide mobile insurance.
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#d_ques_11")
+                                    | 11. Tell me the working hours?
+                        #d_ques_11.panel-collapse.collapse
+                            .panel-body
+                                | Complete your job at a time.
+
+
+                hr
+                h3 USERS QUESTIONS
+
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#u_ques_1")
+                                    | 1. Driver accept the request since 2 hours ago and not respond?
+                        #u_ques_1.panel-collapse.collapse
+                            .panel-body
+                                | We are contact the driver get the status.
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#u_ques_2")
+                                    | 2. When we schedule booking after 4 days?
+                        #u_ques_2.panel-collapse.collapse
+                            .panel-body
+                                | In future add this booking option.
+
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#u_ques_3")
+                                    | 3. Equipment destroy who clam company or driver?
+                        #u_ques_3.panel-collapse.collapse
+                            .panel-body
+                                | Wts a driver responsibility to shift your equipment carefully.
+
+                .panel-group.my-10
+                    .panel.panel-warning
+                        .panel-heading
+                            h4.panel-title
+                                a(data-toggle="collapse" href="#u_ques_4")
+                                    | 4. Is the app available in IOS?
+                        #u_ques_4.panel-collapse.collapse
+                            .panel-body
+                                | We currently we do not have an iOS version of the app but customers can call our call center to make a booking.
+
+        // Start of roadioapp Zendesk Widget script
+        script.
+            /*<![CDATA[*/window.zEmbed || function (e, t) {
+                var n, o, d, i, s, a = [], r = document.createElement("iframe");
+                window.zEmbed = function () {
+                    a.push(arguments)
+                }, window.zE = window.zE || window.zEmbed, r.src = "javascript:false", r.title = "", r.role = "presentation", (r.frameElement || r).style.cssText = "display: none", d = document.getElementsByTagName("script"), d = d[d.length - 1], d.parentNode.insertBefore(r, d), i = r.contentWindow, s = i.document;
+                try {
+                    o = s
+                } catch (e) {
+                    n = document.domain, r.src = 'javascript:var d=document.open();d.domain="' + n + '";void(0);', o = s
+                }
+                o.open()._l = function () {
+                    var e = this.createElement("script");
+                    n && (this.domain = n), e.id = "js-iframe-async", e.src = "https://assets.zendesk.com/embeddable_framework/main.js", this.t = +new Date, this.zendeskHost = "roadioapp.zendesk.com", this.zEQueue = a, this.body.appendChild(e)
+                }, o.write('<body onload="document._l();">'), o.close()
+            }();
+            /*]]>*/
+        // End of roadioapp Zendesk Widget script
+
+        //
+
+          SCRIPTS
+          ==============================
+        script(src='/javascripts/js/bootstrap.min.js')
+        script(src='/javascripts/js/smoothscroll.js')
+        script(src='/javascripts/js/jquery.scrollTo.min.js')
+        script(src='/javascripts/js/jquery.localScroll.min.js')
+        script(src='/javascripts/js/owl.carousel.min.js')
+        script(src='/javascripts/js/nivo-lightbox.min.js')
+        script(src='/javascripts/js/simple-expand.min.js')
+        script(src='/javascripts/js/wow.min.js')
+        script(src='/javascripts/js/jquery.stellar.min.js')
+        script(src='/javascripts/js/retina.min.js')
+        script(src='/javascripts/js/matchMedia.js')
+        script(src='/javascripts/js/jquery.backgroundvideo.min.js')
+        script(src='/javascripts/js/jquery.nav.js')
+        script(src='/javascripts/js/jquery.ajaxchimp.min.js')
+        script(src='/javascripts/js/jquery.fitvids.js')

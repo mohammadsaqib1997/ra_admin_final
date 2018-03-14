@@ -1,0 +1,39 @@
+aside.right-side
+    section.content-header
+        h1 Edit Driver
+        ol.breadcrumb
+            li
+                router-link(to='/admin')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Edit Driver
+    section.content
+        .row
+            .col-xs-12
+                .box
+                    .box-header
+                        h3.box-title Update Information
+                    .box-body
+                        .row
+                            .col-md-6.col-md-offset-3
+                                div.text-center(v-if='dataLoad')
+                                    i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                form_gen_info(v-if='!dataLoad' v-bind:formdata='formdata' v-bind:sel_uid='sel_uid')
+                .box
+                    .box-header
+                        h3.box-title Change Password
+                    .box-body
+                        .row
+                            .col-md-6.col-md-offset-3
+                                div.text-center(v-if='dataLoad')
+                                    i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                form_password(v-if='!dataLoad' v-bind:sel_uid='sel_uid')
+                .box
+                    .box-header
+                        h3.box-title Update Documents
+                    .box-body
+                        .row
+                            .col-md-6.col-md-offset-3
+                                div.text-center(v-if='dataLoad')
+                                    i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                form_docs(v-if='!dataLoad' v-bind:sel_uid='sel_uid')

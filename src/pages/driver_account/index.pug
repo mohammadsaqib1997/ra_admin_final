@@ -1,0 +1,79 @@
+aside.right-side
+    section.content-header
+        h1
+            | Driver Account
+        ol.breadcrumb
+            li
+                router-link(to='/admin')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Driver Account
+    section.content
+        .row
+            .col-xs-12
+                .box
+                    .box-body.table-responsive
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad1')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad1 && Object.keys(invoiceReqData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad1 && Object.keys(invoiceReqData).length > 0')
+                                table_comp(v-bind:per_page="10")
+                                    template(slot="thead")
+                                        tr
+                                            th S.No#
+                                            th Date
+                                            th Details
+                                            th Invoice#
+                                            th Earn
+                                    template(slot="tbody")
+                                        tr(v-for="(row, key, ind) in invoiceReqData")
+                                            td {{ ind+1 }}
+                                            td {{ row.createdAt }}
+                                            td From({{ row.req_data.orgText }}) To({{ row.req_data.desText }}) User({{ row.client_data.first_name }}) Driver({{ row.driver_data.first_name }})
+                                            td
+                                                router-link(v-bind:to="'/admin/invoice/'+key") {{ row.invoice_no }}
+                                            td {{ row.amount }}
+                                    tfoot(slot="tfoot")
+                                        tr
+                                            td.text-right(colspan='4') Total
+                                            td Rs.{{ invoiceReqDataTotal }}
+    section.content-header
+        h1
+            | Commission&nbsp;
+            small Commission History
+    section.content
+        .row
+            .col-xs-12
+                .box
+                    .box-body.table-responsive
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad2')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad2 && Object.keys(invoiceComData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad2 && Object.keys(invoiceComData).length > 0')
+                                table_comp(v-bind:per_page="10")
+                                    template(slot="thead")
+                                        tr
+                                            th S.No#
+                                            th Date
+                                            th Commission Invoice#
+                                            th Order Invoice#
+                                            th Apply Commission(%)
+                                            th Commission Amount
+                                    template(slot="tbody")
+                                        tr(v-for="(row, key, ind) in invoiceComData")
+                                            td {{ ind+1 }}
+                                            td {{ row.createdAt }}
+                                            td
+                                                router-link(v-bind:to="'/admin/invoice/commission/'+key") {{ row.invoice_no }}
+                                            td
+                                                router-link(v-bind:to="'/admin/invoice/'+row.order_inv_key") {{ row.order_invoice }}
+                                            td {{ row.apply_commission }}%
+                                            td {{ row.commission_amount }}
+                                    tfoot(slot="tfoot")
+                                        tr
+                                            td.text-right(colspan='5') Total
+                                            td Rs.{{ invoiceComDataTotal }}

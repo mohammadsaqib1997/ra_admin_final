@@ -1,0 +1,383 @@
+aside.right-side
+    section.content-header
+        h1 Profile
+        ol.breadcrumb
+            li
+                a(href='/')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Profile
+    section.content
+        .row
+            .col-xs-12
+                .col-md-8.col-md-offset-2
+                    .box
+                        .box-body
+                            div.text-center(v-if='dataLoad')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            .row(v-if='!dataLoad')
+                                .col-xs-12
+                                    .col-xs-6
+                                        div.img-thumbnail.img-circle.img-avatar(v-bind:style='"background-image:url("+profileImgURL+")"' v-if='!profileImgLoad && profileImgURL !== ""')
+                                        div.img-thumbnail.img-circle.img-avatar.text-center(v-if='profileImgLoad')
+                                            i.fa.fa-refresh.fa-spin.fa-3x.fa-fw(style="margin-top:20px;")
+                                        h2.user-name-profile {{ userData.first_name }} {{ userData.last_name }}
+                                    .col-xs-6.text-right
+                                        button.btn.btn-success(style='margin-right:10px;' v-on:click='active(userData.key)' v-if='userData.status === 0') Activate
+                                        button.btn.btn-danger(style='margin-right:10px;' v-on:click='deActive(userData.key)' v-else) Deactivate
+                                        router-link.btn.btn-primary(v-if='userData.type === "driver"' v-bind:to="'/admin/drivers/edit_driver/'+userData.key") Edit Profile
+                                    .col-md-12
+                                        h4  General Information
+                                        .col-xs-6
+                                            p First Name
+                                        .col-xs-6
+                                            p {{ userData.first_name }}
+                                    .col-md-12
+                                        .col-xs-6
+                                            p Last Name
+                                        .col-xs-6
+                                            p {{ userData.last_name }}
+                                    .col-md-12
+                                        .col-xs-6
+                                            p Email
+                                        .col-xs-6
+                                            p {{ userData.email }}
+                                    .col-md-12
+                                        .col-xs-6
+                                            p Password
+                                        .col-xs-6
+                                            p ********
+                                    .col-md-12
+                                        .col-xs-6
+                                            p Mobile No.
+                                        .col-xs-6
+                                            p {{ userData.mob_no }}
+                                    template(v-if='userData.type === "driver"')
+                                        .col-md-12
+                                            .col-xs-6
+                                                p CNIC No.
+                                            .col-xs-6
+                                                p {{ userData.cnic_no }}
+                                        .col-md-12
+                                            .col-xs-6
+                                                p Driver License
+                                            .col-xs-6
+                                                p {{ userData.driving_license }}
+                                        .col-md-12
+                                            h4  Vehicle Information
+                                            .col-xs-6
+                                                p Vehicle Type
+                                            .col-xs-6
+                                                p {{ userData.vehicle }}
+                                        .col-md-12
+                                            .col-xs-6
+                                                p Model Year
+                                            .col-xs-6
+                                                p {{ userData.v_model_year }}
+                                        .col-md-12
+                                            .col-xs-6
+                                                p Vehicle Number
+                                            .col-xs-6
+                                                p {{ userData.v_number }}
+                                        .col-md-12
+                                            .col-xs-6
+                                                p Vehicle Make
+                                            .col-xs-6
+                                                p {{ userData.v_make }}
+                                        .col-md-12
+                                            .col-xs-6
+                                                p Owner Of Vehicle
+                                            .col-xs-6
+                                                p {{ userData.v_owner }}
+                                        .col-md-12
+                                            h4 Documents
+                                            .col-xs-6
+                                                p Profile Image
+                                            .col-xs-6
+                                                a.btn.btn-info.btn-sm.mar-bot-5(v-bind:href="profileImgURL" target='_blank' v-if='!profileImgLoad && profileImgURL !== ""')
+                                                    i.fa.fa-eye
+                                                button.btn.btn-danger.btn-sm.mar-bot-5(v-if='!profileImgLoad && profileImgURL === ""' disabled='disabled')
+                                                    i.fa.fa-exclamation
+                                                button.btn.btn-info.btn-sm.mar-bot-5(v-if='profileImgLoad' disabled='disabled')
+                                                    i.fa.fa-refresh.fa-spin.fa-fw
+                                        .col-md-12
+                                            .col-xs-6
+                                                p Scanned CNIC
+                                            .col-xs-6
+                                                a.btn.btn-info.btn-sm.mar-bot-5(v-bind:href="cnicImgURL" target='_blank' v-if='!cnicImgLoad && cnicImgURL !== ""')
+                                                    i.fa.fa-eye
+                                                button.btn.btn-danger.btn-sm.mar-bot-5(v-if='!cnicImgLoad && cnicImgURL === ""' disabled='disabled')
+                                                    i.fa.fa-exclamation
+                                                button.btn.btn-info.btn-sm.mar-bot-5(v-if='cnicImgLoad' disabled='disabled')
+                                                    i.fa.fa-refresh.fa-spin.fa-fw
+                                        .col-md-12
+                                            .col-xs-6
+                                                p Scanned License
+                                            .col-xs-6
+                                                a.btn.btn-info.btn-sm.mar-bot-5(v-bind:href="licenceImgURL" target='_blank' v-if='!licenceImgLoad && licenceImgURL !== ""')
+                                                    i.fa.fa-eye
+                                                button.btn.btn-danger.btn-sm.mar-bot-5(v-if='!licenceImgLoad && licenceImgURL === ""' disabled='disabled')
+                                                    i.fa.fa-exclamation
+                                                button.btn.btn-info.btn-sm.mar-bot-5(v-if='licenceImgLoad' disabled='disabled')
+                                                    i.fa.fa-refresh.fa-spin.fa-fw
+                                        .col-md-12
+                                            .col-xs-6
+                                                p Scanned Registration Letter
+                                            .col-xs-6
+                                                a.btn.btn-info.btn-sm.mar-bot-5(v-bind:href="letterImgURL" target='_blank' v-if='!letterImgLoad && letterImgURL !== ""')
+                                                    i.fa.fa-eye
+                                                button.btn.btn-danger.btn-sm.mar-bot-5(v-if='!letterImgLoad && letterImgURL === ""' disabled='disabled')
+                                                    i.fa.fa-exclamation
+                                                button.btn.btn-info.btn-sm.mar-bot-5(v-if='letterImgLoad' disabled='disabled')
+                                                    i.fa.fa-refresh.fa-spin.fa-fw
+
+    driver-logs-section
+    section.content
+        h2 Requests History
+        .row
+            .tab-content
+                ul.nav.nav-tabs(role='tablist')
+                    li.active(role='tablist')
+                        a(href='#pending' aria-controls='pending' role='tab' data-toggle='tab') Pending
+                    li(role='tablist')
+                        a(href='#completed' aria-controls='completed' role='tab' data-toggle='tab') Completed
+            .tab-content
+                div.tab-pane.active#pending(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad2')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad2 && Object.keys(pendingReqData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad2 && Object.keys(pendingReqData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table1')
+                                table.table.table-hover(ref='table1')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Driver Name
+                                            th Client Name
+                                            th Origin
+                                            th Destination
+                                            th Distance
+                                            th Duration
+                                            th Parcel
+                                            th Created At
+                                            th Vehicle Type
+                                            th Amount
+                                            th Status
+                                    tbody
+                                        tr(v-for="(row, key, ind) in pendingReqData")
+                                            td {{ ind+1 }}
+                                            td {{ row.driver_data.first_name + ' ' + row.driver_data.last_name }}
+                                            td {{ row.client_data.first_name + ' ' + row.client_data.last_name }}
+                                            td {{ row.request_data.orgText }}
+                                            td {{ row.request_data.desText }}
+                                            td {{ row.request_data.disText }}
+                                            td {{ row.request_data.durText }}
+                                            td
+                                                a.btn.btn-info.btn-sm(v-bind:href="row.request_data.parcelUri" target='_blank')
+                                                    i.fa.fa-eye
+                                            td {{ row.request_data.createdAt }}
+                                            td {{ row.driver_data.vehicle }}
+                                            td {{ row.bid_data.amount }}
+                                            td {{ row.active_req_data.status }}
+                                    tfoot
+                                        tr
+                                            td.text-right(colspan='10') Total
+                                            td(colspan='2') Rs.{{ pendingReqDataTotal }}
+                div.tab-pane#completed(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad1')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad1 && Object.keys(completeReqData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad1 && Object.keys(completeReqData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table2')
+                                table.table.table-hover(ref='table2')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Driver Name
+                                            th Client Name
+                                            th Origin
+                                            th Destination
+                                            th Distance
+                                            th Duration
+                                            th Parcel
+                                            th Created At
+                                            th Vehicle Type
+                                            th Amount
+                                    tbody
+                                        tr(v-for="(row, key, ind) in completeReqData")
+                                            td {{ ind+1 }}
+                                            td {{ row.driver_data.first_name + ' ' + row.driver_data.last_name }}
+                                            td {{ row.client_data.first_name + ' ' + row.client_data.last_name }}
+                                            td {{ row.request_data.orgText }}
+                                            td {{ row.request_data.desText }}
+                                            td {{ row.request_data.disText }}
+                                            td {{ row.request_data.durText }}
+                                            td
+                                                a.btn.btn-info.btn-sm(v-bind:href="row.request_data.parcelUri" target='_blank')
+                                                    i.fa.fa-eye
+                                            td {{ row.request_data.createdAt }}
+                                            td {{ row.driver_data.vehicle }}
+                                            td {{ row.bid_data.amount }}
+                                    tfoot
+                                        tr
+                                            td.text-right(colspan='10') Total
+                                            td Rs.{{ completeReqDataTotal }}
+    section.content
+        h2 Earnings Summary
+        .row
+            .tab-content
+                ul.nav.nav-tabs(role='tablist')
+                    li.active(role='tablist')
+                        a(href='#income' aria-controls='income' role='tab' data-toggle='tab') Earnings
+                    li(role='tablist')
+                        a(href='#commission' aria-controls='commission' role='tab' data-toggle='tab') Commission
+                    li(role='tablist')
+                        a(href='#wallet' aria-controls='wallet' role='tab' data-toggle='tab') Wallet
+                    li(role='tablist')
+                        a(href='#add_voucher' aria-controls='add_voucher' role='tab' data-toggle='tab') Add Voucher
+            .tab-content
+                div.tab-pane.active#income(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad3')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad3 && Object.keys(invoiceReqData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad3 && Object.keys(invoiceReqData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table3')
+                                table.table.table-hover(ref='table3')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Date
+                                            th Details
+                                            th Invoice#
+                                            th Earn
+                                    tbody
+                                        tr(v-for="(row, key, ind) in invoiceReqData")
+                                            td {{ ind+1 }}
+                                            td {{ row.createdAt }}
+                                            td From({{ row.req_data.orgText }}) To({{ row.req_data.desText }}) User({{ row.client_data.first_name }}) Driver({{ row.driver_data.first_name }})
+                                            td
+                                                router-link(v-bind:to="'/admin/invoice/'+key") {{ row.invoice_no }}
+                                            td {{ row.amount }}
+                                    tfoot
+                                        tr
+                                            td.text-right(colspan='4') Total
+                                            td Rs.{{ invoiceReqDataTotal }}
+                div.tab-pane#commission(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad2')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad2 && Object.keys(invoiceComData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad2 && Object.keys(invoiceComData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table4')
+                                table.table.table-hover(ref='table4')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Date
+                                            th Commission Invoice#
+                                            th Order Invoice#
+                                            th Apply Commission(%)
+                                            th Commission Amount
+                                    tbody
+                                        tr(v-for="(row, key, ind) in invoiceComData")
+                                            td {{ ind+1 }}
+                                            td {{ row.createdAt }}
+                                            td
+                                                router-link(v-bind:to="'/admin/invoice/commission/'+key") {{ row.invoice_no }}
+                                            td
+                                                router-link(v-bind:to="'/admin/invoice/'+row.order_inv_key") {{ row.order_invoice }}
+                                            td {{ row.apply_commission }}%
+                                            td {{ row.commission_amount }}
+                                    tfoot
+                                        tr
+                                            td.text-right(colspan='5') Total
+                                            td Rs.{{ invoiceComDataTotal }}
+                div.tab-pane#wallet(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad5')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad5 && Object.keys(walletData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad5 && Object.keys(walletData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table5')
+                                table.table.table-hover(ref='table5')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Added Date
+                                            th Narration
+                                            th Debit
+                                            th Credit
+                                            th Balance
+                                    tbody
+                                        tr(v-for="(row, key, ind) in walletData")
+                                            td {{ ind+1 }}
+                                            td {{ row.addedAt }}
+                                            td {{ row.narration }}
+                                            td {{ row.debit }}
+                                            td {{ row.credit }}
+                                            td {{ row.balance }}
+                                    tfoot
+                                        tr
+                                            td.text-right(colspan='3')
+                                                b Balance
+                                            td
+                                            td
+                                            td {{ getLastRow(walletData).balance }}
+                                        tr
+                                            td.text-right(colspan='3')
+                                                b Total
+                                            td {{ totDebit }}
+                                            td(colspan='2') {{ totCredit }}
+                div.tab-pane#add_voucher(role='tabpanel')
+                    .col-xs-12
+                        .row
+                            .col-md-4.col-md-offset-4
+                                div.text-center(v-if='dataLoad')
+                                    i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                template(v-if='!dataLoad')
+                                    h3.text-center Add Voucher
+                                    form(v-on:submit.prevent='addVoucher' method='post')
+                                        p.alert.alert-danger(v-if='mainErr != ""') {{ mainErr }}
+                                        p.alert.alert-success(v-if='mainMsg != ""') {{ mainMsg }}
+                                        .form-group
+                                            label(for='debit') Debit
+                                            input.form-control(type='text' id='debit' v-model='debitTxt' placeholder='Enter debit amount')
+                                            p.alert.alert-danger(v-if='validation.hasError("debitTxt")') {{ validation.firstError('debitTxt') }}
+                                        .form-group
+                                            label(for='credit') Credit
+                                            input.form-control(type='text' id='credit' v-model='creditTxt' placeholder='Enter credit amount')
+                                            p.alert.alert-danger(v-if='validation.hasError("creditTxt")') {{ validation.firstError('creditTxt') }}
+                                        .form-group
+                                            label(for='narration') Narration
+                                            input.form-control(type='text' id='narration' v-model='narrationTxt' placeholder='Enter narration')
+                                            p.alert.alert-danger(v-if='validation.hasError("narrationTxt")') {{ validation.firstError('narrationTxt') }}
+                                        .form-group
+                                            input.btn.btn-success(type='submit' value='Submit')

@@ -1,0 +1,8 @@
+#map_content{
+    overflow: hidden;
+    padding: 10px;
+}
+
+#map_content > p:last-child {
+    margin-bottom: 0;
+}

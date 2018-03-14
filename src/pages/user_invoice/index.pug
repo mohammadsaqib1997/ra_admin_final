@@ -1,0 +1,160 @@
+aside.right-side
+    section.content-header
+        h1
+            | Invoice
+        ol.breadcrumb
+            li
+                router-link(to='/admin')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Invoice
+    section.content
+        .row
+            .col-xs-12
+                .box
+                    .box-body
+                        div.text-center(v-if='dataLoad')
+                            i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                        h3.text-center(style='margin: 15px 0;' v-if='!dataLoad && invData === null')
+                            | No Data Found!
+                        div(style='padding:0;margin:0;' v-if='!dataLoad && invData !== null')
+                            table(width='100%' style="background-color:#333333;color:whitesmoke;border-radius:5px;" cellpadding='20' cellspacing='0')
+                                tbody
+                                    tr
+                                        td(height='50px' align='center')
+                                            img(style='border-bottom:3px solid #fcd519;')(src='http://roadioapp.com/images/roadio_logo_web.png', width='200', alt='Logo')
+                                    tr
+                                        td
+                                            table(width='100%' align='center' cellspacing='0' style='font-family:"Helvetica","Arial",sans-serif')
+                                                tbody
+                                                    tr
+                                                        td(style="border-left: 3px solid #fcd519;padding-left: 10px;")
+                                                            h4 Invoice From:
+                                                                br
+                                                                | RoadioApp
+                                                            a roadioapppak@gmail.com
+                                                    tr
+                                                        td
+                                                            div(style="padding: 5px;")
+                                                    tr
+                                                        td(style="border-left: 3px solid #fcd519;padding-left: 10px;")
+                                                            h4 Invoice To:
+                                                                br
+                                                                | {{ invData.client_data.first_name+" "+invData.client_data.last_name }}
+                                                            a {{ invData.client_data.email }}
+                                                    br
+                                                    tr
+                                                        td(colspan='2' style="border-left: 3px solid #fcd519;padding-left: 10px;")
+                                                            h4 Date: {{ invData.inv_data.createdAt }}
+                                                            h4 Invoice #: {{ invData.inv_data.invoice_no }}
+                                                    tr
+                                                        td
+                                                            div(style="padding: 5px;")
+                                                    tr
+                                                        td(style='width:50%;vertical-align: top;float: right;margin-top: -248px;')
+                                                            table(width='100%' align='center' border=0 style="border: 2px solid;")
+                                                                thead
+                                                                    tr
+                                                                        th(colspan='2' style="border: 2px solid;")
+                                                                            h4(style="margin: 0;padding: 10px;text-align: center;font-size: 27px;color: #fcd519;") Driver Details
+                                                                tbody
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Name
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.driver_data.first_name+" "+invData.driver_data.last_name }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Email
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.driver_data.email }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Mobile No.
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.driver_data.mob_no }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Vehicle
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.driver_data.vehicle }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Vehicle Number
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.driver_data.v_number }}
+                                                        td(style='width:40%;vertical-align: top;')
+                                                            table(width='100%' align='center' border=0 style="border: 2px solid;margin-top: -248px;")
+                                                                thead
+                                                                    tr
+                                                                        th(colspan='2' style="border: 2px solid;")
+                                                                            h4(style="margin: 0;padding: 10px;text-align: center;font-size: 27px;color: #fcd519;") Request Details
+                                                                tbody
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Created Request
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.req_data.createdAt }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Origin
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.req_data.orgText }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Destination
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.req_data.desText }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Vehicle Required
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.req_data.vecType }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Est. Time
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.req_data.durText }}
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | Est. Distance
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                                            | {{ invData.req_data.disText }}
+                                                    tr
+                                                        td
+                                                            div(style="padding: 5px;")
+                                                    tr
+                                                        td(colspan='2')
+                                                            table(width='100%' align='center' border=0 style="border: 2px solid;")
+                                                                thead
+                                                                    tr
+                                                                        th(style="border: 2px solid;")
+                                                                            h4(style="margin: 0;padding: 10px;text-align: center;font-size: 27px;color: #fcd519;") Order Details
+                                                                        th(style="border: 2px solid;min-width: 150px;width: auto;")
+                                                                            h4(style="margin: 0;padding: 10px;text-align: center;font-size: 27px;color: #fcd519;") Amount
+                                                                tbody
+                                                                    tr
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:center;") From({{ invData.req_data.orgText }}) To({{ invData.req_data.desText }}) User({{ invData.client_data.first_name }}) Driver({{ invData.driver_data.first_name }})
+                                                                        td(style="border: 2px solid;padding: 5px;text-align:center;") Rs.{{ invData.inv_data.amount }}
+                                                    tr
+                                                        td
+                                                            div(style="padding: 10px;")
+                                                    tr
+                                                        td(style="border-left: 3px solid #fcd519;padding-left: 10px;")
+                                                            h4 Phone: 0303*******
+                                                    tr
+                                                        td
+                                                            div(style="padding: 5px;")
+                                                    tr
+                                                        td(style="border-left: 3px solid #fcd519;padding-left: 10px;float: right;margin-right: 369px;margin-top: -47px;")
+                                                            h4 Email:&nbsp;
+                                                                a roadioapppak@gmail.com
+                                                    tr
+                                                        td
+                                                            div(style="padding: 5px;")
+                                                    tr
+                                                        td(style="border-left: 3px solid #fcd519;padding-left: 10px;float: right;margin-top: -54px;")
+                                                            h4 Website:&nbsp;
+                                                                a www.roadioapp.com
+
+

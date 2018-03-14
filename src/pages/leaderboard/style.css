@@ -1,0 +1,16 @@
+.top-3-con {
+    width: 100%;
+    padding: 15px;
+}
+
+.top-3-con .img-circle{
+    border: 1px solid #c3c3c3;
+    padding: 2px;
+}
+
+.month_sel {
+    margin-top: 12px;
+    margin-right: 12px;
+    width: 200px;
+    max-width: 100%;
+}

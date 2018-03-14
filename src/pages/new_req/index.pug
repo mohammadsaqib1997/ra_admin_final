@@ -1,0 +1,18 @@
+aside.right-side
+    section.content-header
+        ol.breadcrumb
+            li
+                router-link(to='/')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li Deliveries
+            li Requests
+    section.content
+        .row
+            .col-xs-12
+                div.map_container
+                    #map(ref="map")
+                new_request
+                progress_request
+
+

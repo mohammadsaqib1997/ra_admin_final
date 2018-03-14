@@ -1,0 +1,128 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('roadioapp:server');
+var https = require('https');
+var http = require('http');
+var fs = require('fs');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port1 = normalizePort(process.env.PORT || '3000');
+var port2 = normalizePort(process.env.PORT || '443');
+//app.set('port', port1);
+
+/**
+ * Create HTTP server.
+ */
+var privateKey = fs.readFileSync('config/cert/roadioapp.com.key');
+var certificate = fs.readFileSync('config/cert/4c4971c5dd85d59c.crt');
+var bundle = fs.readFileSync('config/cert/gd_bundle-g2-g1.crt');
+
+var httpsServer = https.createServer({
+    ca: bundle,
+    key: privateKey,
+    cert: certificate
+}, app);
+var httpServer = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+httpsServer.listen(port2);
+httpsServer.on('error', onErrorSec);
+
+httpServer.listen(port1);
+httpServer.on('error', onError);
+//server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onErrorSec(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    var bind = typeof port === 'string'
+        ? 'Pipe ' + port2
+        : 'Port ' + port2;
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    var bind = typeof port1 === 'string'
+        ? 'Pipe ' + port1
+        : 'Port ' + port1;
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+    debug('Listening on ' + bind);
+}

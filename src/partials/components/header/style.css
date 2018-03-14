@@ -1,0 +1,50 @@
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu {
+    max-height: 300px;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li.not_found {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 8px 0;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li.header {
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li.loader {
+    text-align: center;
+    padding: 5px;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a {
+    white-space: normal;
+    display: table;
+    width: 100%;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > i,
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > span
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > span {
+    padding: 10px;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > span > small.date {
+    display: block;
+    text-align: right;
+    margin-top: 5px;
+    color: lightgray;
+}
+
+.read {
+    background-color: #f6f6f6;
+}

@@ -1,0 +1,44 @@
+aside.right-side
+    section.content-header
+        h1
+            | Users&nbsp;
+            small Users List
+        ol.breadcrumb
+            li
+                router-link(to='/admin')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Users
+    section.content
+        .row
+            .col-xs-12
+                .box
+                    .box-header
+                        h3.box-title Users
+                        div.text-center(v-if='dataLoad')
+                            i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                        h3.text-center(style='margin: 15px 0;' v-if='!dataLoad && data1.length === 0')
+                            | No Active User Found!
+                        template(v-if='!dataLoad && data1.length > 0')
+                            table_comp(v-bind:per_page="10")
+                                template(slot="thead")
+                                    tr
+                                        th S.No#
+                                        th Name
+                                        th Email
+                                        th Mobile#
+                                        th Created Time
+                                        th Action
+                                template(slot="tbody")
+                                    tr.open_row(v-for="(row, ind) in data1" v-bind:data-url="'/admin/users/profile/'+row.key")
+                                        td {{ 1+ind }}
+                                        td {{ row.first_name }} {{ row.last_name }}
+                                        td {{ row.email }}
+                                        td {{ row.mob_no }}
+                                        td {{ row.time }}
+                                        td
+                                            button.btn.btn-success.btn-xs(v-on:click.prevet='active(row.key, ind, $event)' v-if='row.status === 0') Activate
+                                            button.btn.btn-danger.btn-xs(v-on:click.prevet='deActive(row.key, ind, $event)' v-else) Deactivate
+                                        td
+                                            button.btn.btn-primary.btn-sm(type="button", v-on:click.prevent='block(row.key, ind, $event)' v-if='row.blocked === false') Block
+                                            button.btn.btn-primary.btn-sm(type="button", v-on:click.prevent='unblock(row.key, ind, $event)' v-else ) UnBlock

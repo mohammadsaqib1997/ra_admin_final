@@ -1,0 +1,18 @@
+aside.right-side
+    section.content-header
+        h1 Add Driver
+        ol.breadcrumb
+            li
+                router-link(to='/')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Add Driver
+    section.content
+        .row
+            .col-md-6
+                add_general_info(v-bind:push_key="userPushRefKey")
+            .col-md-6
+                add_vehicle_info(v-bind:push_key="userPushRefKey")
+            .col-md-12
+            .col-md-6
+                add_docs(v-bind:push_key="userPushRefKey")

@@ -1,0 +1,120 @@
+aside.right-side(slot='right-side')
+    section.content-header
+        h1
+            | Dashboard&nbsp;
+            small Control panel
+        ol.breadcrumb
+            li
+                router-link(to='/admin')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+    section.content
+        .row
+            .col-lg-3.col-xs-6
+                .small-box.bg-aqua
+                    .inner.text-center
+                        h3
+                            template(v-if="!user.loader")
+                                | {{ user.active.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Active Users
+                    router-link.small-box-footer(to="/admin/users")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right
+            .col-lg-3.col-xs-6
+                .small-box.bg-yellow
+                    .inner.text-center
+                        h3
+                            template(v-if="!user.loader")
+                                | {{ user.inactive.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Inactive Users
+                    router-link.small-box-footer(to="/admin/users")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right
+            .col-lg-3.col-xs-6
+                .small-box.bg-blue
+                    .inner.text-center
+                        h3
+                            template(v-if="!driver.loader")
+                                | {{ driver.active.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Active Drivers
+                    router-link.small-box-footer(to="/admin/drivers")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right
+            .col-lg-3.col-xs-6
+                .small-box.bg-green
+                    .inner.text-center
+                        h3
+                            template(v-if="!driver.loader")
+                                | {{ driver.inactive.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Inactive Drivers
+                    router-link.small-box-footer(to="/admin/drivers/requests")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right
+            .col-lg-3.col-xs-6
+                .small-box.bg-green
+                    .inner.text-center
+                        h3
+                            template(v-if="!driver.loader")
+                                | {{ driver.bikers.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Bikers Register
+                    router-link.small-box-footer(to="/admin/drivers")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right
+            .col-lg-3.col-xs-6
+                .small-box.bg-blue
+                    .inner.text-center
+                        h3
+                            template(v-if="!driver.loader")
+                                | {{ driver.cars.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Cars Register
+                    router-link.small-box-footer(to="/admin/drivers")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right
+            .col-lg-3.col-xs-6
+                .small-box.bg-yellow
+                    .inner.text-center
+                        h3
+                            template(v-if="!driver.loader")
+                                | {{ driver.pickup.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Pickups Register
+                    router-link.small-box-footer(to="/admin/drivers")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right
+            .col-lg-3.col-xs-6
+                .small-box.bg-aqua
+                    .inner.text-center
+                        h3
+                            template(v-if="!driver.loader")
+                                | {{ driver.truck.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Trucks Register
+                    router-link.small-box-footer(to="/admin/drivers")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right
+            .col-lg-3.col-xs-6
+                .small-box.bg-aqua
+                    .inner.text-center
+                        h3
+                            template(v-if="!jobs.loader")
+                                | {{ jobs.total.count }}
+                            i.fa.fa-refresh.fa-spin(v-else)
+                        p
+                            | Total Jobs
+                    router-link.small-box-footer(to="/admin/requests/completed")
+                        | More info&nbsp;
+                        i.fa.fa-arrow-circle-right

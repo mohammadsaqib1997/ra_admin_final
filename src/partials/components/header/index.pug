@@ -1,0 +1,51 @@
+header.header
+    a.logo(href='/')
+        // Add the class icon to your logo image or logo icon to add the margining
+        //img.img-circle.img-avatar2(src='/images/roadio_logo.jpeg', alt='roadio logo')
+        | RoadioApp Admin
+    // Header Navbar: style can be found in header.less
+    nav.navbar.navbar-static-top(role='navigation')
+        // Sidebar toggle button
+        a.navbar-btn.sidebar-toggle(href='#', data-toggle='offcanvas', role='button')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        .navbar-right
+            ul.nav.navbar-nav
+                // Notifications: style can be found in dropdown.less
+                li.dropdown.notifications-menu
+                    a.dropdown-toggle(href='#', data-toggle='dropdown')
+                        i.fa.fa-bell
+                        span.label.label-warning(v-if="unReadMsg > 0") {{ unReadMsg }}
+                    ul.dropdown-menu
+                        li.loader(v-if="notiLoader")
+                            i.fa.fa-refresh.fa-2x.fa-spin
+                        template(v-else)
+                            li.header(v-if="unReadMsg > 0") You have {{ unReadMsg }} unread notifications
+                            li.not_found(v-if="notiData.length < 1")
+                                | No Notification Found!
+                            li(v-else)
+                                // inner menu: contains the actual data
+                                ul.menu
+                                    li(v-for="noti in notiData" v-on:click="notiClick(noti)")
+                                        router-link(:to="noti.link" v-bind:class="{read:noti.seen}")
+                                            i.ion.ion-ios7-person.info
+                                            span {{ noti.body }}
+                                                small.date ({{ genDate(noti.created_at) }})
+
+                // User Account: style can be found in dropdown.less
+                li.dropdown.user.user-menu
+                    a.dropdown-toggle(href='#', data-toggle='dropdown')
+                        i.glyphicon.glyphicon-user
+                        span
+                            | Roadio Admin
+                            i.caret
+                    ul.dropdown-menu
+                        li.user-header.bg-light-blue
+                            img.img-circle(src='/images/roadio_logo.jpeg', alt='User Image')
+                            p
+                                | Roadio Admin
+                        li.user-footer
+                            .pull-right
+                                button.btn.btn-default.btn-flat(v-on:click='logout') Sign out

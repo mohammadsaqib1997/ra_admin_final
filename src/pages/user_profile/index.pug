@@ -1,0 +1,235 @@
+aside.right-side
+    section.content-header
+        h1 Profile
+        ol.breadcrumb
+            li
+                a(href='/')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Profile
+    section.content
+        .row
+            .col-xs-12
+                .col-md-8.col-md-offset-2
+                    .box
+                        .box-body
+                            div.text-center(v-if='dataLoad')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            .row(v-if='!dataLoad')
+                                .col-xs-12
+                                    .col-xs-6
+                                        div.img-thumbnail.img-circle.img-avatar(v-bind:style='"background-image:url("+profileImgURL+")"' v-if='!profileImgLoad && profileImgURL !== ""')
+                                        div.img-thumbnail.img-circle.img-avatar.text-center(v-if='profileImgLoad')
+                                            i.fa.fa-refresh.fa-spin.fa-3x.fa-fw(style="margin-top:20px;")
+                                        h2.user-name-profile {{ userData.first_name }} {{ userData.last_name }}
+                                    .col-xs-6.text-right
+                                        button.btn.btn-success(style='margin-right:10px;' v-on:click='active(userData.key)' v-if='userData.status === 0') Activate
+                                        button.btn.btn-danger(style='margin-right:10px;' v-on:click='deActive(userData.key)' v-else) Deactivate
+                                    .col-md-12
+                                        h4  General Information
+                                        .col-xs-6
+                                            p First Name
+                                        .col-xs-6
+                                            p {{ userData.first_name }}
+                                    .col-md-12
+                                        .col-xs-6
+                                            p Last Name
+                                        .col-xs-6
+                                            p {{ userData.last_name }}
+                                    .col-md-12
+                                        .col-xs-6
+                                            p Email
+                                        .col-xs-6
+                                            p {{ userData.email }}
+                                    .col-md-12
+                                        .col-xs-6
+                                            p Password
+                                        .col-xs-6
+                                            p ********
+                                    .col-md-12
+                                        .col-xs-6
+                                            p Mobile No.
+                                        .col-xs-6
+                                            p {{ userData.mob_no }}
+
+    section.content
+        h2 Requests History
+        .row
+            .tab-content
+                ul.nav.nav-tabs(role='tablist')
+                    li.active(role='tablist')
+                        a(href='#live' aria-controls='live' role='tab' data-toggle='tab') Live
+                    li(role='tablist')
+                        a(href='#pending' aria-controls='pending' role='tab' data-toggle='tab') Pending
+                    li(role='tablist')
+                        a(href='#completed' aria-controls='completed' role='tab' data-toggle='tab') Completed
+            .tab-content
+                div.tab-pane.active#live(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad3')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad3 && Object.keys(liveReqData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad3 && Object.keys(liveReqData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table1')
+                                table.table.table-hover(ref='table1')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Origin
+                                            th Destination
+                                            th Distance
+                                            th Duration
+                                            th Parcel
+                                            th Created At
+                                            th Require Vehicle
+                                            th Number Of Bids
+                                    tbody
+                                        tr(v-for="(row, key, ind) in liveReqData")
+                                            td {{ ind+1 }}
+                                            td {{ row.request_data.orgText }}
+                                            td {{ row.request_data.desText }}
+                                            td {{ row.request_data.disText }}
+                                            td {{ row.request_data.durText }}
+                                            td
+                                                a.btn.btn-info.btn-sm(v-bind:href="row.request_data.parcelUri" target='_blank')
+                                                    i.fa.fa-eye
+                                            td {{ row.request_data.createdAt }}
+                                            td {{ row.request_data.vecType }}
+                                            td {{ row.num_bids }}
+                div.tab-pane#pending(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad2')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad2 && Object.keys(pendingReqData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad2 && Object.keys(pendingReqData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table2')
+                                table.table.table-hover(ref='table2')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Driver Name
+                                            th Client Name
+                                            th Origin
+                                            th Destination
+                                            th Distance
+                                            th Duration
+                                            th Parcel
+                                            th Created At
+                                            th Vehicle Type
+                                            th Amount
+                                            th Status
+                                    tbody
+                                        tr(v-for="(row, key, ind) in pendingReqData")
+                                            td {{ ind+1 }}
+                                            td {{ row.driver_data.first_name + ' ' + row.driver_data.last_name }}
+                                            td {{ row.client_data.first_name + ' ' + row.client_data.last_name }}
+                                            td {{ row.request_data.orgText }}
+                                            td {{ row.request_data.desText }}
+                                            td {{ row.request_data.disText }}
+                                            td {{ row.request_data.durText }}
+                                            td
+                                                a.btn.btn-info.btn-sm(v-bind:href="row.request_data.parcelUri" target='_blank')
+                                                    i.fa.fa-eye
+                                            td {{ row.request_data.createdAt }}
+                                            td {{ row.driver_data.vehicle }}
+                                            td {{ row.bid_data.amount }}
+                                            td {{ row.active_req_data.status }}
+                                    tfoot
+                                        tr
+                                            td.text-right(colspan='10') Total
+                                            td(colspan='2') Rs.{{ pendingReqDataTotal }}
+                div.tab-pane#completed(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad1')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad1 && Object.keys(completeReqData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad1 && Object.keys(completeReqData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table3')
+                                table.table.table-hover(ref='table3')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Driver Name
+                                            th Client Name
+                                            th Origin
+                                            th Destination
+                                            th Distance
+                                            th Duration
+                                            th Parcel
+                                            th Created At
+                                            th Vehicle Type
+                                            th Amount
+                                    tbody
+                                        tr(v-for="(row, key, ind) in completeReqData")
+                                            td {{ ind+1 }}
+                                            td {{ row.driver_data.first_name + ' ' + row.driver_data.last_name }}
+                                            td {{ row.client_data.first_name + ' ' + row.client_data.last_name }}
+                                            td {{ row.request_data.orgText }}
+                                            td {{ row.request_data.desText }}
+                                            td {{ row.request_data.disText }}
+                                            td {{ row.request_data.durText }}
+                                            td
+                                                a.btn.btn-info.btn-sm(v-bind:href="row.request_data.parcelUri" target='_blank')
+                                                    i.fa.fa-eye
+                                            td {{ row.request_data.createdAt }}
+                                            td {{ row.driver_data.vehicle }}
+                                            td {{ row.bid_data.amount }}
+                                    tfoot
+                                        tr
+                                            td.text-right(colspan='10') Total
+                                            td Rs.{{ completeReqDataTotal }}
+    section.content
+        h2 Spent Summary
+        .row
+            .tab-content
+                ul.nav.nav-tabs(role='tablist')
+                    li.active(role='tablist')
+                        a(href='#income' aria-controls='income' role='tab' data-toggle='tab') Spent
+            .tab-content
+                div.tab-pane.active#income(role='tabpanel')
+                    .col-xs-12
+                        div.table-responsive
+                            div.text-center(v-if='dataLoad4')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            h3.text-center(style='margin: 15px 0;' v-if='!dataLoad4 && Object.keys(invoiceReqData).length === 0')
+                                | No Data Found!
+                            template(v-if='!dataLoad4 && Object.keys(invoiceReqData).length > 0')
+                                .row
+                                    .col-md-3.col-md-offset-9
+                                        .form-group
+                                            input.form-control(type='text' placeholder='Search' v-model='search_table4')
+                                table.table.table-hover(ref='table4')
+                                    thead
+                                        tr
+                                            th S.No#
+                                            th Date
+                                            th Details
+                                            th Invoice#
+                                            th Spent
+                                    tbody
+                                        tr(v-for="(row, key, ind) in invoiceReqData")
+                                            td {{ ind+1 }}
+                                            td {{ row.createdAt }}
+                                            td From({{ row.req_data.orgText }}) To({{ row.req_data.desText }}) User({{ row.client_data.first_name }}) Driver({{ row.driver_data.first_name }})
+                                            td
+                                                router-link(v-bind:to="'/admin/invoice/'+key") {{ row.invoice_no }}
+                                            td {{ row.amount }}
+                                    tfoot
+                                        tr
+                                            td.text-right(colspan='4') Total
+                                            td Rs.{{ invoiceReqDataTotal }}

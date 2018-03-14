@@ -1,0 +1,22 @@
+form(v-on:submit.prevent="form_submit")
+    .row
+        .col-md-12
+            p.alert.alert-success(v-if='sucMsg !== ""') {{ sucMsg }}
+            p.alert.alert-danger(v-if='errMsg !== ""') {{ errMsg }}
+        .col-md-12
+            .row
+                .col-md-6
+                    .form-group
+                        label(for='n_pass') New Password
+                        input.form-control(type='password' id='n_pass' v-model='password' placeholder='Must be between 6 to 30 Characters')
+                        p.text-danger.text-right(v-if='validation.hasError("password")') {{ validation.firstError('password') }}
+                .col-md-6
+                    .form-group
+                        label(for='re_pass') Re-type Password
+                        input.form-control(type='password' id='re_pass' v-model='repeat' placeholder='Both Password Must Match')
+                        p.text-danger.text-right(v-if='validation.hasError("repeat")') {{ validation.firstError('repeat') }}
+        .col-md-12
+            .form-group.text-center
+                button.btn.btn-success.btn-lg(type='submit' v-if="!formStatus") Update
+                button.btn.btn-success.btn-lg(type='button' disabled='disabled' v-if="formStatus")
+                    i.fa.fa-refresh.fa-spin.fa-fw

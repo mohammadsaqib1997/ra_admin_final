@@ -1,0 +1,86 @@
+aside.right-side
+    section.content-header
+        h1
+            | Leader Board&nbsp;
+            small Monthly Winners
+        ol.breadcrumb
+            li
+                router-link(to='/admin')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Users
+    section.content
+        .row
+            .col-xs-12
+                .box
+                    .box-header
+                        h3.box-title Top 3 Drivers
+                        .pull-right.month_sel
+                            select.form-control(v-model="selected_m")
+                                option(v-for="m in months_sel" v-bind:value="m.unix") {{ m.date }}
+                    .box-body
+                        .row
+                            .col-lg-4
+                                .text-center
+                                    .img-thumbnail.top-3-con
+                                        div.text-center(v-if='loader')
+                                            i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                        template(v-else-if="data.length > 0")
+                                            img.img-circle(:src='top3Images[0]', width='100px', height='100px')
+                                            h4
+                                                router-link(:to="'/admin/drivers/profile/'+data[0].id") {{ data[0].name }}
+                                        template(v-else)
+                                            h4 No Ranking Found
+                            .col-lg-4
+                                .text-center
+                                    .img-thumbnail.top-3-con
+                                        div.text-center(v-if='loader')
+                                            i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                        template(v-else-if="data.length > 1")
+                                            img.img-circle(:src='top3Images[1]', width='100px', height='100px')
+                                            h4
+                                                router-link(:to="'/admin/drivers/profile/'+data[1].id") {{ data[1].name }}
+                                        template(v-else)
+                                            h4 No Ranking Found
+                            .col-lg-4
+                                .text-center
+                                    .img-thumbnail.top-3-con
+                                        div.text-center(v-if='loader')
+                                            i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                                        template(v-else-if="data.length > 2")
+                                            img.img-circle(:src='top3Images[2]', width='100px', height='100px')
+                                            h4
+                                                router-link(:to="'/admin/drivers/profile/'+data[2].id") {{ data[2].name }}
+                                        template(v-else)
+                                            h4 No Ranking Found
+        hr
+        .row
+            .col-xs-12
+                .box
+                    .box-header
+                        h3.box-title Top 10 Drivers
+                    .box-body
+                        .table-responsive
+                            div.text-center(v-if='loader')
+                                i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+                            template(v-else)
+                                table_comp(v-bind:per_page="10")
+                                    template(slot="thead")
+                                        tr
+                                            th Rank#
+                                            th Name
+                                            th Total Time
+                                            th Rating
+                                            th Earning
+                                            th Bids
+                                            th Total Points
+                                    template(slot="tbody")
+                                        tr(v-for="(row, ind) in data")
+                                            td {{ ind+1 }}
+                                            td
+                                                router-link(:to="'/admin/drivers/profile/'+row.id") {{ row.name }}
+                                            td {{ row.time.m }} mins
+                                            td {{ row.rating }}
+                                            td {{ row.earning }}
+                                            td {{ row.bids }}
+                                            td {{ row.points }}

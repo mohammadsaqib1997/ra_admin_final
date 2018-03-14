@@ -1,0 +1,582 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+
+        //facebook sharing content
+        meta(property="fb:app_id" content="1379317195528816")
+        meta(property="og:url" content="https://roadioapp.com")
+        meta(property="og:type" content="website")
+        meta(property="og:title" content="RoadioApp")
+        meta(property="og:description" content="Saman bhejna ab hua asan Car, Suzuki ya Truck sirf ek button ki duri per.")
+        meta(property="og:image" content="https://roadioapp.com/images/fav_icon.png")
+
+        // SITE TITLE
+        title Roadioapp
+        //
+          =========================
+          FAV AND TOUCH ICONS
+          ==============================
+        link(rel='icon', href='/images/fav_icon.png')
+        //link(rel='apple-touch-icon', href='images/apple-touch-icon.png')
+        //link(rel='apple-touch-icon', sizes='72x72', href='images/apple-touch-icon-72x72.png')
+        //link(rel='apple-touch-icon', sizes='114x114', href='images/apple-touch-icon-114x114.png')
+        //
+          =========================
+          STYLESHEETS
+          ==============================
+        // BOOTSTRAP
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        // FONT ICONS
+        link(rel='stylesheet', href='/stylesheets/assets/elegant-icons/style.css')
+        link(rel='stylesheet', href='/stylesheets/assets/app-icons/styles.css')
+        //if lte IE 7
+          script(src='lte-ie7.js')
+        // WEB FONTS
+        link(href='https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic', rel='stylesheet', type='text/css')
+        // CAROUSEL AND LIGHTBOX
+        link(rel='stylesheet', href='/stylesheets/css/owl.theme.css')
+        link(rel='stylesheet', href='/stylesheets/css/owl.carousel.css')
+        link(rel='stylesheet', href='/stylesheets/css/nivo-lightbox.css')
+        link(rel='stylesheet', href='/stylesheets/css/nivo_themes/default/default.css')
+        // ANIMATIONS
+        link(rel='stylesheet', href='/stylesheets/css/animate.min.css')
+        // CUSTOM STYLESHEETS
+        link(rel='stylesheet', href='/stylesheets/css/styles.css')
+        // COLORS
+        link(rel='stylesheet', href='/stylesheets/css/colors/blue.css')
+        // DEFAULT COLOR/ CURRENTLY USING
+        // <link rel="stylesheet" href="css/colors/red.css">
+        // <link rel="stylesheet" href="css/colors/green.css">
+        // <link rel="stylesheet" href="css/colors/purple.css">
+        // <link rel="stylesheet" href="css/colors/orange.css">
+        // <link rel="stylesheet" href="css/colors/blue-munsell.css">
+        // <link rel="stylesheet" href="css/colors/slate.css">
+        // <link rel="stylesheet" href="css/colors/yellow.css">
+        // RESPONSIVE FIXES
+        link(rel='stylesheet', href='/stylesheets/css/responsive.css')
+        //if lt IE 9
+          script(src='js/html5shiv.js')
+          script(src='js/respond.min.js')
+        // JQUERY
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    body
+        //
+          =========================
+          PRE LOADER
+          ==============================
+        .preloader
+            .status  
+        //
+          =========================
+          HEADER
+          ==============================
+        header#home.header
+            // COLOR OVER IMAGE
+            .color-overlay
+                // To make header full screen. Use .full-screen class with color overlay. Example: <div class="color-overlay full-screen">
+                // STICKY NAVIGATION
+                .navbar.navbar-inverse.bs-docs-nav.navbar-fixed-top.sticky-navigation
+                    .container
+                        .navbar-header
+                            // LOGO ON STICKY NAV BAR
+                            button.navbar-toggle(type='button', data-toggle='collapse', data-target='#kane-navigation')
+                                span.sr-only Toggle navigation
+                                span.icon-bar
+                                span.icon-bar
+                                span.icon-bar
+                            a.navbar-brand(href='#')
+                                img(src='/images/roadio_logo_web.png', alt='')
+                        // NAVIGATION LINKS
+                        #kane-navigation.navbar-collapse.collapse
+                            ul.nav.navbar-nav.navbar-right.main-navigation
+                                li
+                                    a(href='#home') Home
+                                li
+                                    a(href='#features') Features
+                                li
+                                    a(href='#brief1') Why Us?
+                                li
+                                    a(href='#brief2') About
+                                li
+                                    a(href='#services') Services
+                                li
+                                    a(href='/privacy') Privacy
+                                li
+                                    a(href='#screenshot-section') How to order
+                                li
+                                    a(href='#download') Download
+                                li
+                                    a(href='/partner') Partner
+                    // /END CONTAINER
+                // /END STICKY NAVIGATION
+                // CONTAINER
+                .container
+                    // ONLY LOGO ON HEADER
+                    .only-logo
+                        .navbar(style='padding-bottom:0px;')
+                            .navbar-header
+                                img(src='/images/roadio_logo_web.png', alt='')
+                    // /END ONLY LOGO ON HEADER
+                    .row
+                        .col-md-8.col-md-offset-2
+                            // HEADING AND BUTTONS
+                            .intro-section
+                                // WELCOM MESSAGE
+                                h2.intro Saman bhejna ab hua asan
+                                    br
+                                    | Car, Suzuki ya Truck sirf ek button ki duri per
+                                h5 Available on App Store and Play Store
+                                // BUTTON
+                                #download-button.buttons
+                                    a.btn.btn-default.btn-lg.standard-button(href='#download')
+                                        i.icon-app-download
+                                        | Download App
+                                // /END BUTTONS
+                            // /END HEADNING AND BUTTONS
+                    // /END ROW
+                // /END CONTAINER
+            // /END COLOR OVERLAY
+        // /END HEADER
+        //
+          =========================
+          FEATURES
+          ==============================
+        section#features.features
+            .container
+                // SECTION HEADER
+                .section-header.wow.fadeIn.animated(data-wow-offset='120', data-wow-duration='1.5s')
+                    // SECTION TITLE
+                    h2.white-text Amazing Features
+                    .colored-line
+                    .section-description
+                        | Now shifting house, moving furniture, delivering parcels or documents are easy with Roadioapp
+                    .colored-line
+                // /END SECTION HEADER
+                .row
+                    // FEATURES LEFT
+                    .col-md-4.col-sm-4.features-left.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        // FEATURE
+                        .feature
+                            // ICON
+                            .icon-container
+                                .icon
+                                    i.icon_map_alt
+                            // FEATURE HEADING AND DESCRIPTION
+                            .fetaure-details
+                                h4.main-color Auction System
+                                p
+                                    | Pricing services Roadioapp set based auction offered by Partners
+                        // /END SINGLE FEATURE
+                        // FEATURE
+                        .feature
+                            // ICON
+                            .icon-container
+                                .icon
+                                    i.icon_calculator_alt
+                            // FEATURE HEADING AND DESCRIPTION
+                            .fetaure-details
+                                h4.main-color Various services
+                                p
+                                    | Roadioapp provide transportation services, logistics and warehousing in one mobile application
+                        .feature
+                            // ICON
+                            .icon-container
+                                .icon
+                                    i.icon_gift_alt
+                            // FEATURE HEADING AND DESCRIPTION
+                            .fetaure-details
+                                h4.main-color Easy to use
+                                p
+                                    | Applications Roadioapp easy to use
+                        // /END SINGLE FEATURE
+                        // FEATURE
+                        // /END SINGLE FEATURE
+                    // /END FEATURES LEFT
+                    // PHONE IMAGE
+                    .col-md-4.col-sm-4
+                        .phone-image.wow.bounceIn.animated(data-wow-offset='120', data-wow-duration='1.5s')
+                            img(src='/images/amazaing_screen.png', alt='')
+                    // FEATURES RIGHT
+                    .col-md-4.col-sm-4.features-right.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        // FEATURE
+                        .feature
+                            // ICON
+                            .icon-container
+                                .icon
+                                    i.icon_genius
+                            // FEATURE HEADING AND DESCRIPTION
+                            .fetaure-details
+                                h4.main-color A wide variety of payment alternatives
+                                p
+                                    | Roadioapp provide payment in cash and non-cash
+                        // /END SINGLE FEATURE
+                        // FEATURE
+                        .feature
+                            // ICON
+                            .icon-container
+                                .icon
+                                    i.icon_lightbulb_alt
+                            // FEATURE HEADING AND DESCRIPTION
+                            .fetaure-details
+                                h4.main-color Realtime monitoring
+                                p
+                                    | You can monitor realtime movement of the driver through the application
+                        // /END SINGLE FEATURE
+                        // FEATURE
+                        .feature
+                            // ICON
+                            .icon-container
+                                .icon
+                                    i.icon_ribbon_alt
+                            // FEATURE HEADING AND DESCRIPTION
+                            .fetaure-details
+                                h4.main-color Safe and comfortable
+                                p
+                                    | We strive to give you the best partners
+                        // /END SINGLE FEATURE
+                    // /END FEATURES RIGHT
+                // /END ROW
+            // /END CONTAINER
+        // /END FEATURES SECTION
+        //
+          =========================
+          BRIEF LEFT SECTION
+          ==============================
+        section#brief1.app-brief.deep-dark-bg
+            .container
+                .row
+                    // PHONES IMAGE
+                    .col-md-6.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        .phone-image
+                            img(src='/images/become_roadio.png', alt='')
+                    // RIGHT SIDE WITH BRIEF
+                    .col-md-6.left-align.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        // SECTION TITLE
+                        h2.white-text Become a Roadio
+                        .colored-line-left
+                        p
+                            | RoadioApp gives an amazing opportunity to vehicle owners to earn a stable income every month and also bonuses on quarterly basis.
+                        // FEATURE LIST
+                        ul.feature-list
+                            li
+                                i.icon_lock_alt
+                                |  Guaranteed earning upto Rs. 50,000/-
+                            li
+                                i.icon_check_alt2
+                                |  Give offers to customers as you wish.
+                            li
+                                i.icon_paperclip
+                                |  Earn Points to win bonus and prices.
+                            li
+                                i.icon_adjust-vert
+                                |  Be your own boss.
+                        #download-button2.buttons
+                            a.btn.btn-default.btn-lg.standard-button(href='/partner')
+                                i.icon-app-download
+                                | Become a Roadio
+                    // /END RIGHT BRIEF
+                // /END ROW
+            // /END CONTAINER
+        // /END SECTION
+        //
+          =========================
+          BRIEF RIGHT SECTION
+          ==============================
+        section#brief2.app-brief
+            .container
+                .row
+                    // BRIEF
+                    .col-md-6.left-align.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        // SECTION TITLE
+                        h2.white-text About Roadioapp
+                        .colored-line-left
+                        p
+                            | Roadioapp providing services city courier, trucking, transportation and warehousing. Roadioapp a marketplace service provider city courier, trucking, transportation and warehousing, from companies and private.
+                            br
+                            br
+                            |                Unlike the services that exist today, Roadioapp has a unique service that is not owned by any other competitor. As tariff services are determined by partners who have collaborated with Roadioapp, conducted by an auction mechanism.
+                            | Customers can define their own partners desired service according to the price and rating offered partners.
+                    // /ENDBRIEF
+                    // PHONES IMAGE
+                    .col-md-6.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        .phone-image
+                            img(src='/images/become_roadio.png', alt='')
+                    // /END PHONES IMAGE
+                // /END ROW
+            // /END CONTAINER
+        // /END SECTION
+        //
+          =========================
+          BRIEF LEFT SECTION WITH VIDEO
+          ==============================
+          TESTIMONIALS
+          ==============================
+        section.testimonials
+            .color-overlay
+                .container.wow.fadeIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                    // FEEDBACKS
+                    #feedbacks.owl-carousel.owl-theme
+                        // SINGLE FEEDBACK
+                        .feedback
+                            // IMAGE
+                            .image
+                                // i class=" icon_quotations"></i
+                                img(src='/images/avatar5.png', alt='')
+                            .message
+                                | Awesome deliverer, I recommend him
+                            .white-line
+                            // INFORMATION
+                            .name
+                                | Usama Hassan
+                            //.company-info
+                            //    | CEO, AbZ Network
+                        // /END SINGLE FEEDBACK
+                        // SINGLE FEEDBACK
+                        .feedback
+                            // IMAGE
+                            .image
+                                // i class=" icon_quotations"></i
+                                img(src='/images/rameez.jpg', alt='')
+                            .message
+                                | Quick and fast deliverer.
+                            .white-line
+                            // INFORMATION
+                            .name
+                                | Rameez Raja
+                        // /END SINGLE FEEDBACK
+                        // SINGLE FEEDBACK
+                        // /END SINGLE FEEDBACK
+                    // /END FEEDBACKS
+                // /END CONTAINER
+            // /END COLOR OVERLAY
+        // /END TESTIMONIALS SECTION
+        //
+          =========================
+          SERVICES
+          ==============================
+        section#services.services
+            .container
+                // SECTION HEADER
+                .section-header.wow.fadeIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                    // SECTION TITLE
+                    h2.white-text It's Awesome
+                    .colored-line
+                    .section-description
+                        | Don't wait, download Roadioapp now and experience the best online door to door delivery service of Pakistan.
+                    .colored-line
+                // /END SECTION HEADER
+                .row
+                    // SINGLE SERVICE
+                    .col-md-4.single-service.wow.fadeIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        // SERVICE ICON
+                        .service-icon
+                            i.icon_cloud-upload_alt
+                        // SERVICE HEADING
+                        h3 No Packaging Required
+                        // SERVICE DESCRIPTION
+                        p
+                            | Delivering with Roadioapp is super easy, just tap on order, provide your pickup and drop location and get offers from thousands of RoadioApp verified drivers. No need to pack/wrap or tag just hand over and consider job done.
+                    // /END SINGLE SERVICE
+                    // SINGLE SERVICE
+                    .col-md-4.single-service.wow.fadeIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        // SERVICE ICON
+                        .service-icon
+                            i.icon_gift_alt
+                        // SERVICE HEADING
+                        h3 Monthly Rewards
+                        // SERVICE DESCRIPTION
+                        p
+                            | Invite your friends and family members and earn RoadioApp credits. Introduce drivers to our app and get a free delivery. Learn more.
+                    // /END SINGLE SERVICE
+                    // SINGLE SERVICE
+                    .col-md-4.single-service.wow.fadeIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                        // SERVICE ICON
+                        .service-icon
+                            i.icon_chat_alt
+                        // SERVICE HEADING
+                        h3 24/7 Support
+                        // SERVICE DESCRIPTION
+                        p
+                            | RoadioApp Ninja support center is there for your assistance all day and night. you may write us and raise a ticket or you may call our customer support representative at +9233223232323.
+                    // /END SINGLE SERVICE
+                // /END ROW
+            // /END CONTAINER
+        // /END FEATURES SECTION
+        //
+          =========================
+          SCREENSHOTS
+          ==============================
+        section#screenshot-section.screenshots.deep-dark-bg
+            .container
+                // SECTION HEADER
+                .section-header.wow.fadeIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                    // SECTION TITLE
+                    h2.white-text How to order a delivery
+                    .colored-line
+                    .section-description
+                        | Get your parcel delivered in just 4 simple steps
+                    .colored-line
+                // /END SECTION HEADER
+                .row.wow.bounceIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                    #screenshots.owl-carousel.owl-theme
+                        .shot
+                            a(href='/images/screenshots/screen1.png', data-lightbox-gallery='screenshots-gallery')
+                                img(src='images/screenshots/screen1.png', alt='Screenshot')
+                        .shot
+                            a(href='/images/screenshots/screen4.png', data-lightbox-gallery='screenshots-gallery')
+                                img(src='images/screenshots/screen4.png', alt='Screenshot')
+                        .shot
+                            a(href='/images/screenshots/screen5.png', data-lightbox-gallery='screenshots-gallery')
+                                img(src='images/screenshots/screen5.png', alt='Screenshot')
+                        .shot
+                            a(href='/images/screenshots/screen6.png', data-lightbox-gallery='screenshots-gallery')
+                                img(src='images/screenshots/screen6.png', alt='Screenshot')
+                        .shot
+                            a(href='/images/screenshots/screen8.png', data-lightbox-gallery='screenshots-gallery')
+                                img(src='images/screenshots/screen8.png', alt='Screenshot')
+                    // /END SCREENSHOTS
+                // /END ROW
+            // /END CONTAINER
+        // /END SCREENSHOTS SECTION
+        //
+
+          DOWNLOAD NOW
+          ==============================
+        section#download.download
+            .color-overlay
+                .container
+                    .row
+                        .col-md-8.col-md-offset-2
+                            // DOWNLOAD BUTTONS AREA
+                            h2.text-center ANY TIME, ANY PLACE
+                            p.text-center Whether it’s a book or a bed, use RoadioApp to send your stuff. Cheap, fun, safe and environmental.
+                            .download-container
+                                h2.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s') Download the app on
+                                // BUTTONS
+                                .buttons.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                                    a.left-store-icon(href='')
+                                        img(src='/images/mac_store.png')
+                                    a.right-store-icon(href='https://play.google.com/store/apps/details?id=com.roadioapp.roadioappuser')
+                                        img(src='/images/play_store.png')
+                                // /END BUTTONS
+                            // END OF DOWNLOAD BUTTONS AREA
+                            .subscription-form-container
+                                h2.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s') Subscribe Now!
+                                //
+                                  =====================
+                                  MAILCHIMP FORM STARTS
+                                  =====================
+                                form.subscription-form.mailchimp.form-inline.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s', role='form')
+                                    // SUBSCRIPTION SUCCESSFUL OR ERROR MESSAGES
+                                    h4.subscription-success
+                                    h4.subscription-error
+                                    // EMAIL INPUT BOX
+                                    input#subscriber-email.form-control.input-box(type='email', name='email', placeholder='Your Email')
+                                    // SUBSCRIBE BUTTON
+                                    button#subscribe-button.btn.btn-default.standard-button(type='submit') Subscribe
+                                // /END MAILCHIMP FORM STARTS
+                                //
+                                  =====================
+                                  LOCAL TXT FORM STARTS
+                                  =====================
+                                //
+                                  THIS FORM IS COMMENTED TO HIDE
+                                  <form class="subscription-form form-inline wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s" id="subscribe" role="form">
+                                  <h4 class="subscription-success"><i class="icon_check"></i> Thank you! We will notify you soon.</h4>
+                                  <h4 class="subscription-error">Something Wrong!</h4>
+                                  <input type="email" name="email" id="subscriber-email" placeholder="Your Email" class="form-control input-box">
+                                  <button type="submit" id="subscribe-button" class="btn btn-default standard-button">Subscribe</button>
+                                  </form>
+                                // / LOCAL TXT SAVING FORM END
+
+                        // END COLUMN
+                    // END ROW
+                // /END CONTAINER
+            // /END COLOR OVERLAY
+        // /END DOWNLOAD SECTION
+        //
+          =========================
+          FOOTER
+          ==============================
+        footer
+            .container
+                .contact-box.wow.rotateIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
+                    // CONTACT BUTTON TO EXPAND OR COLLAPSE FORM
+                    a.btn.contact-button.expand-form.expanded
+                        i.icon_mail_alt
+                    // EXPANDED CONTACT FORM
+                    .row.expanded-contact-form
+                        .col-md-8.col-md-offset-2
+                            // FORM
+                            form#contact.contact-form(role='form')
+                                // IF MAIL SENT SUCCESSFULLY
+                                h4.success
+                                    i.icon_check
+                                    |  Your message has been sent successfully.
+                                // IF MAIL SENDING UNSUCCESSFULL
+                                h4.error
+                                    i.icon_error-circle_alt
+                                    |  E-mail must be valid and message must be longer than 1 character.
+                                .col-md-6
+                                    input#name.form-control.input-box(type='text', name='name', placeholder='Your Name')
+                                .col-md-6
+                                    input#email.form-control.input-box(type='email', name='email', placeholder='Your Email')
+                                .col-md-12
+                                    input#subject.form-control.input-box(type='text', name='subject', placeholder='Subject')
+                                    textarea#message.form-control.textarea-box(rows='8', placeholder='Message')
+                                button#submit.btn.btn-primary.standard-button2.ladda-button(type='submit', name='submit', data-style='expand-left') Send Message
+                            // /END FORM
+                    // /END EXPANDED CONTACT FORM
+                // /END CONTACT BOX
+                // LOGO
+                img.responsive-img(src='/images/roadio_logo_web.png', alt='LOGO')
+                // SOCIAL ICONS
+                ul.social-icons
+                    li
+                        a(href='https://www.facebook.com/RoadioApp-271823006566712/')
+                            i.social_facebook_square
+                    //li
+                    //    a(href='')
+                    //        i.social_twitter_square
+                    //li
+                    //    a(href='')
+                    //        i.social_pinterest_square
+                    //li
+                    //    a(href='')
+                    //        i.social_googleplus_square
+                    //li
+                    //    a(href='')
+                    //        i.social_instagram_square
+                    //li
+                    //    a(href='')
+                    //        i.social_dribbble_square
+                    //li
+                    //    a(href='')
+                    //        i.social_flickr_square
+                // COPYRIGHT TEXT
+                p.copyright
+                    | ©2017 Roadioapp, All Rights Reserved
+            // /END CONTAINER
+        // /END FOOTER
+        //
+          =========================
+          SCRIPTS
+          ==============================
+        script(src='/javascripts/js/bootstrap.min.js')
+        script(src='/javascripts/js/smoothscroll.js')
+        script(src='/javascripts/js/jquery.scrollTo.min.js')
+        script(src='/javascripts/js/jquery.localScroll.min.js')
+        script(src='/javascripts/js/owl.carousel.min.js')
+        script(src='/javascripts/js/nivo-lightbox.min.js')
+        script(src='/javascripts/js/simple-expand.min.js')
+        script(src='/javascripts/js/wow.min.js')
+        script(src='/javascripts/js/jquery.stellar.min.js')
+        script(src='/javascripts/js/retina.min.js')
+        script(src='/javascripts/js/matchMedia.js')
+        script(src='/javascripts/js/jquery.backgroundvideo.min.js')
+        script(src='/javascripts/js/jquery.nav.js')
+        script(src='/javascripts/js/jquery.ajaxchimp.min.js')
+        script(src='/javascripts/js/jquery.fitvids.js')
+        script(src='/javascripts/js/custom.js')

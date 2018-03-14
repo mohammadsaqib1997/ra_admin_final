@@ -1,0 +1,51 @@
+aside.right-side
+    section.content-header
+        h1 Edit Adda
+        ol.breadcrumb
+            li
+                router-link(to='/')
+                    i.fa.fa-dashboard
+                    |  Dashboard
+            li.active Edit Adda
+    section.content
+        .row
+            .col-xs-12
+                .box
+                    .box-header
+                        h3.box-title Edit Adda
+                    .box-body
+                        .row
+                            .col-md-6.col-md-offset-3
+                                .row
+                                    .col-md-12(v-if="formCB.err !== '' || formCB.suc !== ''")
+                                        p.alert.alert-danger(v-if="formCB.err !== ''") {{formCB.err}}
+                                        p.alert.alert-success(v-if="formCB.suc !== ''") {{formCB.suc}}
+                                    .col-md-12
+                                        .row
+                                            .col-md-12
+                                                .form-group
+                                                    label(for='aname') Adda Name
+                                                    input.form-control(type='text' id='aname' v-model.trim='aName' placeholder='Eg: Gulistan-e-Johar')
+                                                    p.text-danger.text-right(v-if='validation.hasError("aName")') {{ validation.firstError('aName') }}
+                                                    div.text-right(v-if='validation.isValidating("aName")')
+                                                        i.fa.fa-spinner.fa-spin
+                                            .col-md-6
+                                                .form-group
+                                                    label(for='lat') Latitude
+                                                    input.form-control(type='text' id='lat' v-model='location.lat' v-on:keyup="changeLLMapSet" placeholder='Eg: 123.0123')
+                                                    p.text-danger.text-right(v-if='validation.hasError("location.lat")') {{ validation.firstError('location.lat') }}
+                                            .col-md-6
+                                                .form-group
+                                                    label(for='lng') Longitude
+                                                    input.form-control(type='text' id='lng' v-model='location.lng' v-on:keyup="changeLLMapSet" placeholder='Eg: 123.0123')
+                                                    p.text-danger.text-right(v-if='validation.hasError("location.lng")') {{ validation.firstError('location.lng') }}
+                                            .col-md-12
+                                                .form-group
+                                                    label Select Address
+                                                    input.form-control#pac_input(type='text' placeholder='Search Location')
+                                                    #map(ref="map")
+                                    .col-md-12
+                                        .form-group.text-center
+                                            button.btn.btn-warning.btn-sm(type='button' v-if="formSubStatus" disabled)
+                                                i.fa.fa-refresh.fa-spin.fa-2x.fa-fw
+                                            button.btn.btn-success.btn-lg(type='button' v-on:click.prevent="updateAdda" v-else) Update

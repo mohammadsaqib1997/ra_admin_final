@@ -1,0 +1,98 @@
+form(v-on:submit.prevent="form_submit")
+    .row
+        .col-md-12
+            h4.page-header General Information
+            p.alert.alert-success(v-if='sucMsg !== ""') {{ sucMsg }}
+            p.alert.alert-danger(v-if='errMsg !== ""') {{ errMsg }}
+        .col-md-12
+            .row
+                .col-md-6
+                    .form-group
+                        label(for='fname') First Name
+                        input.form-control(type='text' autocomplete='off' id='fname' v-model='formdata.fname' placeholder='Eg: Ali')
+                        p.text-danger.text-right(v-if='validation.hasError("formdata.fname")') {{ validation.firstError('formdata.fname') }}
+                .col-md-6
+                    .form-group
+                        label(for='lname') Last Name
+                        input.form-control(type='text' autocomplete='off' id='lname' v-model='formdata.lname' placeholder='Eg: Khan')
+                        p.text-danger.text-right(v-if='validation.hasError("formdata.lname")') {{ validation.firstError('formdata.lname') }}
+        .col-md-12
+            .form-group
+                label(for='email') Email
+                input.form-control(type='email' autocomplete='off' id='email' v-model='formdata.email' placeholder='Eg: example@gmail.com')
+                div.text-right
+                    i.fa.fa-spinner.fa-spin(v-if='validation.isValidating("formdata.email")')
+                p.text-danger.text-right(v-if='validation.hasError("formdata.email")') {{ validation.firstError('formdata.email') }}
+        .col-md-12
+            .row
+                .col-md-6
+                    .form-group
+                        label(for='mobile_number') Mobile No.(+92)
+                        input.form-control(type='text' autocomplete='off' id='mobile_number' v-model='formdata.mobile_number' placeholder='Eg: 923002390816 (Without Symbols)')
+                        div.text-right
+                            i.fa.fa-spinner.fa-spin(v-if='validation.isValidating("formdata.mobile_number")')
+                        p.text-danger.text-right(v-if='validation.hasError("formdata.mobile_number")') {{ validation.firstError('formdata.mobile_number') }}
+                .col-md-6
+                    .form-group
+                        label(for='cnic_number') CNIC No.
+                        input.form-control(type='text' autocomplete='off' id='cnic_number' v-model='formdata.cnic_number' placeholder='Eg: 3172457197361 (Without Dashes)')
+                        p.text-danger.text-right(v-if='validation.hasError("formdata.cnic_number")') {{ validation.firstError('formdata.cnic_number') }}
+        .col-md-12
+            .form-group
+                label(for='driving_license') Driving License
+                input.form-control(type='text' autocomplete='off' id='driving_license' v-model='formdata.driving_license' placeholder='Eg: 3172457197361#832 (Without Dashes)')
+                p.text-danger.text-right(v-if='validation.hasError("formdata.driving_license")') {{ validation.firstError('formdata.driving_license') }}
+        .col-md-6
+            .form-group
+                label(for='sel_adda') Select Adda
+                select.form-control(id="sel_adda" v-model="formdata.sel_adda")
+                    option(value="") Select Adda
+                    option(v-for="adda in addaListData" v-bind:value="adda.id") {{ adda.place_name }}
+                p.text-danger.text-right(v-if='validation.hasError("formdata.sel_adda")') {{ validation.firstError('formdata.sel_adda') }}
+        .col-md-6
+            .form-group(style="margin-left: 20px;")
+                label Offline Driver
+                .checkbox.text-left
+                    label
+                        input.ml-0(type='checkbox' v-model="formdata.offline_driver")
+                        | &nbsp;{{ (formdata.offline_driver) ? 'Yes':'No' }}
+        .col-md-12
+            h4.page-header Vehicle Information
+        .col-md-12
+            .form-group
+                label(for='vehicle') Vehicle Type
+                select.form-control(id='vehicle' v-model='formdata.vehicle')
+                    option(value='') Select Vehicle Type
+                    option(value='Bike') Bike
+                    option(value='Car') Car
+                    option(value='Pickup') Pickup
+                    option(value='Truck') Truck
+                p.text-danger.text-right(v-if='validation.hasError("formdata.vehicle")') {{ validation.firstError('formdata.vehicle') }}
+        .col-md-12
+            .row
+                .col-md-6
+                    .form-group
+                        label(for='model_year') Model Year
+                        input.form-control(type='text' autocomplete='off' id='model_year' v-model='formdata.model_year' placeholder='Eg: 2008')
+                        p.text-danger.text-right(v-if='validation.hasError("formdata.model_year")') {{ validation.firstError('formdata.model_year') }}
+                .col-md-6
+                    .form-group
+                        label(for='vehicle_number') Vehicle Number
+                        input.form-control(type='text' autocomplete='off' id='vehicle_number' v-model='formdata.vehicle_number' placeholder='Eg: BEL-9231')
+                        p.text-danger.text-right(v-if='validation.hasError("formdata.vehicle_number")') {{ validation.firstError('formdata.vehicle_number') }}
+        .col-md-12
+            .form-group
+                label(for='make') Make
+                input.form-control(type='text' autocomplete='off' id='make' v-model='formdata.make' placeholder='Eg: Honda')
+                p.text-danger.text-right(v-if='validation.hasError("formdata.make")') {{ validation.firstError('formdata.make') }}
+        .col-md-12
+            .form-group(style="margin-left: 20px;")
+                .checkbox.text-left
+                    label
+                        input.cusCheckBox(type='checkbox' v-model='formdata.owner')
+                        | Yes, I am the owner of this vehicle
+        .col-md-12
+            .form-group.text-center
+                button.btn.btn-success.btn-lg(type='submit' v-if="!formStatus") Update
+                button.btn.btn-success.btn-lg(type='button' disabled='disabled' v-if="formStatus")
+                    i.fa.fa-refresh.fa-spin.fa-fw

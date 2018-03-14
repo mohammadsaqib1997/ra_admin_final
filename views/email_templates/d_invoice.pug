@@ -1,0 +1,77 @@
+div(style='padding:0;margin:0;' v-if='!dataLoad && invData !== null')
+    table(width='100%' style="background-color:#fff;color:000;border-radius:5px;" cellpadding='20' cellspacing='0')
+        tbody
+            tr
+                td(height='50px' align='left')
+                    img(src='http://roadioapp.com/images/roadioapp_logo_dark.png', width='200', alt='Logo')
+            tr
+                td
+                    table(width='100%' align='center' cellspacing='0' style='font-family:"Helvetica","Arial",sans-serif')
+                        tbody
+                            tr
+                                td(style="border-left: 3px solid #fcd519;padding-left: 10px;")
+                                    h4 Invoice From:
+                                        br
+                                        | RoadioApp
+                                    a noreply@roadioapp.com
+                            tr
+                                td
+                                    div(style="padding: 5px;")
+                            tr
+                                td(style="border-left: 3px solid #fcd519;padding-left: 10px;")
+                                    h4 Invoice To:
+                                        br
+                                        | #{ driver_data.first_name+" "+driver_data.last_name }
+                                    a #{ driver_data.email }
+                            tr
+                                td(colspan='2' style="text-align:right;border-right: 3px solid #fcd519;padding-right: 10px;")
+                                    h4 Date: #{ com_inv_data.createdAt }
+                                    h4 Invoice #: #{ com_inv_data.invoice_no }
+                            tr
+                                td
+                                    div(style="padding: 5px;")
+                            tr
+                                td(style='vertical-align: top;')
+                                    table(width='100%' align='center' border=0)
+                                        thead
+                                            tr
+                                                th(colspan='2' style="border: 2px solid;")
+                                                    h4(style="margin: 0;padding: 10px;text-align: left;") Commission Invoice
+                                        tbody
+                                            tr
+                                                td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                    | Order Detail
+                                                td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                    | From(#{ req_data.orgText }) To(#{ req_data.desText })
+                                            tr
+                                                td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                    | Order Invoice
+                                                td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                    | #{ "#"+inv_data.invoice_no }
+                                            tr
+                                                td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                    | Commission Apply
+                                                td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                    | #{ com_inv_data.apply_commission }%
+                                            tr
+                                                td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                    | Commission Payable Amount
+                                                td(style="border: 2px solid;padding: 5px;text-align:left;")
+                                                    | Rs.#{ com_inv_data.commission_amount }
+                            tr
+                                td
+                                    div(style="padding: 10px;")
+                            tr
+                                td
+                                    div(style="padding: 5px;")
+                            tr
+                                td(style="border-left: 3px solid #fcd519;padding-left: 10px;")
+                                    h4 Email:&nbsp;
+                                        a info@roadioapp.com
+                            tr
+                                td
+                                    div(style="padding: 5px;")
+                            tr
+                                td(style="border-left: 3px solid #fcd519;padding-left: 10px;")
+                                    h4 Website:&nbsp;
+                                        a(href="https://www.roadioapp.com") www.roadioapp.com
