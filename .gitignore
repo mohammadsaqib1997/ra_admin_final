@@ -13,3 +13,5 @@ __*.*
 
 public/javascripts/vue_frameworks/app/*.js
 public/javascripts/vue_frameworks/app/*.css
+
+*-lock.json
