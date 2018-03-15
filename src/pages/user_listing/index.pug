@@ -29,6 +29,7 @@ aside.right-side
                                         th Mobile#
                                         th Created Time
                                         th Action
+                                        th Status
                                 template(slot="tbody")
                                     tr.open_row(v-for="(row, ind) in data1" v-bind:data-url="'/admin/users/profile/'+row.key")
                                         td {{ 1+ind }}

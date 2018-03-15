@@ -31,17 +31,21 @@ aside.right-side
                                         th Driver Name
                                         th Driver Email
                                         th Mobile#
+                                        th Driver Profile
                                         th CNIC#
                                         th Vehicle Type
                                         th Created Time
                                         th Action
-                                        th status
+                                        th Status
                                 template(slot="tbody")
                                     tr.open_row(v-for="(row, ind) in data1" v-bind:data-url="'/admin/drivers/profile/'+row.key")
                                         td {{ ind+1 }}
                                         td {{ row.first_name }} {{ row.last_name }}
                                         td {{ row.email }}
                                         td {{ row.mob_no }}
+                                        td
+                                            progress-bar(v-model='progressValue[ind]' style='background-color: #428bca;')
+
                                         td {{ row.cnic_no }}
                                         td {{ row.vehicle }}
                                         td {{ row.time }}

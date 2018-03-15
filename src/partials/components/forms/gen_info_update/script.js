@@ -43,7 +43,7 @@ export default {
         },
         'formdata.email': function (value) {
             let self = this;
-            return Validator.value(value).required().email().maxLength(50).custom(function () {
+            return Validator.value(value).email().maxLength(50).custom(function () {
                 if (!Validator.isEmpty(value)) {
                     return Promise.delay(1000)
                         .then(function () {
@@ -102,22 +102,22 @@ export default {
             });
         },
         'formdata.cnic_number': function (value) {
-            return Validator.value(value).required().digit().lengthBetween(13, 13, "Invalid CNIC Number!");
+            return Validator.value(value).digit().lengthBetween(13, 13, "Invalid CNIC Number!");
         },
         'formdata.driving_license': function (value) {
-            return Validator.value(value).required().minLength(5).maxLength(35);
+            return Validator.value(value).minLength(5).maxLength(35);
         },
         'formdata.vehicle': function (value) {
-            return Validator.value(value).required().in(['Bike', 'Car', 'Pickup', 'Truck']);
+            return Validator.value(value).in(['Bike', 'Car', 'Pickup', 'Truck']);
         },
         'formdata.model_year': function (value) {
-            return Validator.value(value).required().digit().lengthBetween(4, 4, "Invalid Year!");
+            return Validator.value(value).digit().lengthBetween(4, 4, "Invalid Year!");
         },
         'formdata.vehicle_number': function (value) {
-            return Validator.value(value).required().lengthBetween(7, 8, "Invalid Vehicle Number!");
+            return Validator.value(value).lengthBetween(7, 8, "Invalid Vehicle Number!");
         },
         'formdata.make': function (value) {
-            return Validator.value(value).required().minLength(3).maxLength(20);
+            return Validator.value(value).minLength(3).maxLength(20);
         },
         'formdata.sel_adda': function(value) {
             return Validator.value(value).maxLength(30);
