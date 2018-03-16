@@ -77,7 +77,8 @@ export default {
                 let mapOptions = {
                     center: latlng,
                     zoom: 12,
-                    styles: googleStyle
+                    styles: googleStyle,
+                    streetViewControl: false,
                 };
                 self.map = new google.maps.Map(document.getElementById('map'), mapOptions);
                 self.infoWindows = new google.maps.InfoWindow();

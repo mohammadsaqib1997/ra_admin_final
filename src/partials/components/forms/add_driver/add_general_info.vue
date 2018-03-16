@@ -9,12 +9,12 @@
                     p.alert.alert-success(v-if="formUtil.suc !== ''") {{ formUtil.suc }}
                 .col-md-6
                     .form-group
-                        label(for='first_name') First Name
+                        label(for='first_name') First Name*
                         input.form-control(type='text' id='first_name' v-model.trim='first_name' placeholder='Eg: Ali')
                         p.text-danger.text-right(v-if='validation.hasError("first_name")') {{ validation.firstError('first_name') }}
                 .col-md-6
                     .form-group
-                        label(for='last_name') Last Name
+                        label(for='last_name') Last Name*
                         input.form-control(type='text' id='last_name' v-model.trim='last_name' placeholder='Eg: Khan')
                         p.text-danger.text-right(v-if='validation.hasError("last_name")') {{ validation.firstError('last_name') }}
                 .col-md-12
@@ -26,18 +26,18 @@
                         <!--p.text-danger.text-right(v-if='validation.hasError("email")') {{ validation.firstError('email') }}-->
                 .col-md-6
                     .form-group
-                        label(for='password') Password
+                        label(for='password') Password*
                         input.form-control(type='password' id='password' v-model='password' placeholder='Must be between 6 to 30 Characters')
                         input.button.btn.btn-success(type='button', value='Generate', v-on:click="generate", tabindex='2')
                         p.text-danger.text-right(v-if='validation.hasError("password")') {{ validation.firstError('password') }}
-                .col-md-6
+                <!--.col-md-6-->
                      <!--.form-group-->
                         <!--label(for='confirm_password') Re-Type Password-->
                         <!--input.form-control(type='password' id='confirm_password' v-model='confirm_password' placeholder='Both Password Must Match')-->
                         <!--p.text-danger.text-right(v-if='validation.hasError("confirm_password")') {{ validation.firstError('confirm_password') }}-->
                 .col-md-6
                     .form-group
-                        label(for='mobile_number') Mobile No.
+                        label(for='mobile_number') Mobile No.*
                         input.form-control(type='text' id='mobile_number' v-model.trim='mobile_number' placeholder='Eg: 923002390816 (Without Dashes)')
                         div.text-right(v-if='validation.isValidating("mobile_number")')
                             i.fa.fa-spinner.fa-spin
@@ -54,7 +54,7 @@
                         <!--p.text-danger.text-right(v-if='validation.hasError("driving_license")') {{ validation.firstError('driving_license') }}-->
                 .col-md-6
                     .form-group
-                        label(for='sel_adda') Select Adda
+                        label(for='sel_adda') Select Adda*
                         select.form-control(id="sel_adda" v-model="sel_adda")
                             option(value="") Select Adda
                             option(v-for="adda in addaListData" v-bind:value="adda.id") {{ adda.place_name }}

@@ -1,10 +1,9 @@
 <template lang="pug">
     div
         .box
-            .box-header
-                h3.box-title New Request
             .box-body
                 div.table-responsive
+                    h3.box-title(style="margin-bottom: -26px;") New Requests
                     div.text-center(v-if='dataLoad')
                         i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
                     h3.text-center(style='margin: 15px 0;' v-if='!dataLoad && all.length === 0')

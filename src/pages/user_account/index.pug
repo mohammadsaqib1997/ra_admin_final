@@ -1,5 +1,5 @@
 aside.right-side
-    section.content-header
+    section.content-header(style="display:none")
         h1
             | User Account
         ol.breadcrumb
@@ -7,12 +7,13 @@ aside.right-side
                 router-link(to='/admin')
                     i.fa.fa-dashboard
                     |  Dashboard
-            li.active User Account
+            li.active
     section.content
         .row
             .col-xs-12
                 .box
                     .box-body.table-responsive
+                        h3.box-title(style="margin-bottom: -26px;") User Account
                         div.table-responsive
                             div.text-center(v-if='dataLoad1')
                                 i.fa.fa-refresh.fa-spin.fa-3x.fa-fw

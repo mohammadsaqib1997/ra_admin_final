@@ -9,7 +9,7 @@
                     p.alert.alert-success(v-if="formUtil.suc !== ''") {{ formUtil.suc }}
                 .col-md-12
                     .form-group
-                        label(for='vehicle') Vehicle Type
+                        label(for='vehicle') Vehicle Type*
                         select.form-control(id='vehicle' v-model='vehicle')
                             option(value='') Select Vehicle Type
                             option(v-for="v in v_list" v-bind:value='v') {{ v }}

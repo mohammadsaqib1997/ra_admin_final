@@ -1,10 +1,9 @@
 <template lang="pug">
     div
         .box
-            .box-header
-                h3.box-title Delivery In Progress
             .box-body
                 div.table-responsive
+                    h3.box-title(style="margin-bottom: -26px;") Delivery In Progress
                     div.text-center(v-if='dataLoad')
                         i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
                     h3.text-center(style='margin: 15px 0;' v-if='!dataLoad && all.length === 0')
@@ -14,6 +13,7 @@
                             tr
                                 th S.No#
                                 th Date
+                                th Request ID
                                 th Origin
                                 th Destination
                                 th Distance
@@ -24,6 +24,7 @@
                             tr(v-for='(row, ind) in all')
                                 td {{ ind+1 }}
                                 td {{ row.req_data.createdAt }}
+                                td {{ row.req_data.id }}
                                 td {{ row.req_data.orgText }}
                                 td {{ row.req_data.desText }}
                                 td {{ row.req_data.disText }}

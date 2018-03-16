@@ -1,5 +1,5 @@
 aside.right-side
-    section.content-header
+    section.content-header(style="display:none")
         h1
             | Drivers&nbsp;
             small Drivers List
@@ -8,13 +8,14 @@ aside.right-side
                 router-link(to='/admin')
                     i.fa.fa-dashboard
                     |  Dashboard
-            li.active Drivers
+            li.active Drivers List
+
     section.content
         .row
             .col-xs-12
                 .box
                     .box-header
-                        h3.box-title Drivers
+                        h3.box-title Drivers List
                         .box-tools.text-right
                             router-link.btn.btn-sm.btn-success(to='/admin/drivers/add_driver' style='color:white')
                                 i.fa.fa-plus

@@ -7,7 +7,14 @@ Kane - Responsive App Landing Page 1.7
 GLOBAL STYLES
 =========================================
 -----------------------------------------*/
-
+.q1{
+    color: #555;
+    font-weight: 600;
+}
+.q2{
+    color: #222222;
+    font-weight: 500;
+}
 html {
     font-size: 100%;
 }

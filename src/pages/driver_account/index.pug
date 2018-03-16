@@ -1,5 +1,5 @@
 aside.right-side
-    section.content-header
+    section.content-header(style="display:none")
         h1
             | Driver Account
         ol.breadcrumb
@@ -7,12 +7,13 @@ aside.right-side
                 router-link(to='/admin')
                     i.fa.fa-dashboard
                     |  Dashboard
-            li.active Driver Account
+            li.active
     section.content
         .row
             .col-xs-12
                 .box
                     .box-body.table-responsive
+                        h3.box-title(style="margin-bottom: -26px;") Driver Account
                         div.table-responsive
                             div.text-center(v-if='dataLoad1')
                                 i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
@@ -39,15 +40,16 @@ aside.right-side
                                         tr
                                             td.text-right(colspan='4') Total
                                             td Rs.{{ invoiceReqDataTotal }}
-    section.content-header
-        h1
-            | Commission&nbsp;
-            small Commission History
+    section.content-header(style="display:none")
+
     section.content
         .row
             .col-xs-12
                 .box
                     .box-body.table-responsive
+                        h3.box-title(style="margin-bottom: -26px;")
+                            | Commission&nbsp;
+                            small Commission History
                         div.table-responsive
                             div.text-center(v-if='dataLoad2')
                                 i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
