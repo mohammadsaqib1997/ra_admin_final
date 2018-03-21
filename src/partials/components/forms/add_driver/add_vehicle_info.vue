@@ -18,17 +18,17 @@
                     .form-group
                         label(for='model_year') Model Year
                         input.form-control(type='text' id='model_year' v-model='model_year' placeholder='Eg: 2008')
-                        <!--p.text-danger.text-right(v-if='validation.hasError("model_year")') {{ validation.firstError('model_year') }}-->
+                        p.text-danger.text-right(v-if='validation.hasError("model_year")') {{ validation.firstError('model_year') }}
                 .col-md-6
                     .form-group
                         label(for='vehicle_number') Vehicle Number
                         input.form-control(type='text' id='vehicle_number' v-model='vehicle_number' placeholder='Eg: BEL-923')
-                        <!--p.text-danger.text-right(v-if='validation.hasError("vehicle_number")') {{ validation.firstError('vehicle_number') }}-->
+                        p.text-danger.text-right(v-if='validation.hasError("vehicle_number")') {{ validation.firstError('vehicle_number') }}
                 .col-md-12
                     .form-group
                         label(for='make') Make
                         input.form-control(type='text' id='make' v-model='make' placeholder='Eg: Honda')
-                        <!--p.text-danger.text-right(v-if='validation.hasError("make")') {{ validation.firstError('make') }}-->
+                        p.text-danger.text-right(v-if='validation.hasError("make")') {{ validation.firstError('make') }}
                 .col-md-12
                     .form-group(style="margin-left: 20px;")
                         .checkbox.text-left
@@ -45,84 +45,95 @@
 </template>
 
 <script>
-    import firebase from 'firebase'
-    import SimpleVueValidation from 'simple-vue-validator'
+import firebase from "firebase";
+import SimpleVueValidation from "simple-vue-validator";
 
-    const Validator = SimpleVueValidation.Validator;
+const Validator = SimpleVueValidation.Validator;
 
-    export default {
-        name: "add_vehicle_info",
-        props: ['push_key'],
-        data () {
-            const db = firebase.database();
-            return {
-                userRef: db.ref("users"),
-                v_list: ['Bike', 'Car', 'Pickup', 'Truck'],
-                formUtil: {
-                    submitted: false,
-                    err: "",
-                    suc: "",
-                    process: false
-                },
-                vehicle: '',
-                model_year: '',
-                vehicle_number: '',
-                make: '',
-                owner_v: false
-            }
-        },
-        validators: {
-            vehicle(value) {
-                return Validator.value(value).required().in(this.v_list, "Invalid Value!");
-            },
-            model_year(value) {
-                return Validator.value(value).required().digit().lengthBetween(4, 4, "Invalid Year!");
-            },
-            vehicle_number(value) {
-                return Validator.value(value).required().lengthBetween(7, 8, "Invalid Vehicle Number!");
-            },
-            make(value) {
-                return Validator.value(value).required().lengthBetween(3, 30);
-            }
-        },
-        methods: {
-            submit () {
-                const self = this;
-                self.formUtil.process = true;
-                self.formUtil.err = "";
-                self.$validate().then(function (success) {
-                    if (success) {
-                        self.userRef.child(self.push_key).once('value', function (snap) {
-                            if (snap.val() !== null) {
-                                self.userRef.child(self.push_key).update({
-                                    vehicle: self.vehicle,
-                                    v_model_year: self.model_year,
-                                    v_number: self.vehicle_number,
-                                    v_make: self.make,
-                                    v_owner: (self.owner_v) ? "Yes": "No",
-                                }, function (err) {
-                                    if(err){
-                                        self.formUtil.err = err.message;
-                                    }else{
-                                        self.formUtil.submitted = true;
-                                        self.formUtil.err = "";
-                                        self.formUtil.suc = "Successfully insert data!";
-                                        setTimeout(function () {
-                                            self.formUtil.suc = "";
-                                        }, 1500);
-                                    }
-                                    self.formUtil.process = false;
-                                });
-                            }else{
-                                self.formUtil.err = "Please first add general information!";
-                            }
-                            self.formUtil.process = false;
-                        });
-                    }else{
-                        self.formUtil.process = false;
-                    }
-                });
-            }
-        }
+export default {
+  name: "add_vehicle_info",
+  props: ["push_key"],
+  data() {
+    const db = firebase.database();
+    return {
+      userRef: db.ref("users"),
+      v_list: ["Bike", "Car", "Pickup", "Truck"],
+      formUtil: {
+        submitted: false,
+        err: "",
+        suc: "",
+        process: false
+      },
+      vehicle: "",
+      model_year: "",
+      vehicle_number: "",
+      make: "",
+      owner_v: false
+    };
+  },
+  validators: {
+    vehicle(value) {
+      return Validator.value(value)
+        .required()
+        .in(this.v_list, "Invalid Value!");
+    },
+    model_year(value) {
+      return Validator.value(value)
+        .digit()
+        .lengthBetween(4, 4, "Invalid Year!");
+    },
+    vehicle_number(value) {
+      return Validator.value(value).lengthBetween(
+        7,
+        8,
+        "Invalid Vehicle Number!"
+      );
+    },
+    make(value) {
+      return Validator.value(value).lengthBetween(3, 30);
     }
+  },
+  methods: {
+    submit() {
+      const self = this;
+      self.formUtil.process = true;
+      self.formUtil.err = "";
+      self.$validate().then(function(success) {
+        if (success) {
+          self.userRef.child(self.push_key).once("value", function(snap) {
+            if (snap.val() !== null) {
+              self.userRef.child(self.push_key).update(
+                {
+                  vehicle: self.vehicle,
+                  v_model_year: self.model_year,
+                  v_number: self.vehicle_number,
+                  v_make: self.make,
+                  v_owner: self.owner_v ? "Yes" : "No"
+                },
+                function(err) {
+                  if (err) {
+                    self.formUtil.err = err.message;
+                  } else {
+                    self.formUtil.submitted = true;
+                    self.formUtil.err = "";
+                    self.formUtil.suc = "Successfully insert data!";
+                    setTimeout(function() {
+                      self.formUtil.suc = "";
+                    }, 1500);
+                  }
+                  self.formUtil.process = false;
+                }
+              );
+            } else {
+              self.formUtil.process = false;
+              self.formUtil.err = "Please first add general information!";
+            }
+          });
+        } else {
+          self.formUtil.process = false;
+        }
+      });
+    }
+  }
+};
 </script>
