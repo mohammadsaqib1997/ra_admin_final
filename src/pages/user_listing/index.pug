@@ -37,7 +37,7 @@ aside.right-side
                                         td {{ row.email }}
                                         td {{ row.mob_no }}
                                         td {{ row.time }}
-                                        td
+                                        td(data-indx="status" v-bind:data-search="row.status")
                                             button.btn.btn-success.btn-xs(v-on:click.prevet='active(row.key, ind, $event)' v-if='row.status === 0') Activate
                                             button.btn.btn-danger.btn-xs(v-on:click.prevet='deActive(row.key, ind, $event)' v-else) Deactivate
                                         //td

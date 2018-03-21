@@ -43,7 +43,7 @@ export default {
         return {
             dataLoad: true,
             data1: [],
-            userRef: null,
+            userRef: null
         }
     },
     methods: {
