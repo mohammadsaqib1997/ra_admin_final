@@ -50,10 +50,10 @@ aside.right-side
                                         td {{ row.cnic_no }}
                                         td {{ row.vehicle }}
                                         td {{ row.time }}
-                                        td
+                                        td(data-indx="status" v-bind:data-search="row.status")
                                             button.btn.btn-success.btn-xs(v-on:click.prevet='active(row.key, ind, $event)' v-if='row.status === 0') Activate
                                             button.btn.btn-danger.btn-xs(v-on:click.prevet='deActive(row.key, ind, $event)' v-else) Deactivate
 
-                                        td
-                                            button.btn.btn-primary.btn-sm(type="button", v-on:click.prevent='block(row.key, ind, $event)' v-if='row.blocked === false') Block
-                                            button.btn.btn-primary.btn-sm(type="button", v-on:click.prevent='unblock(row.key, ind, $event)' v-else ) UnBlock
+                                        td(data-indx="blocked" v-bind:data-search="(typeof row.blocked === 'undefined') ? 'false':row.blocked+''")
+                                            button.btn.btn-primary.btn-sm(type="button", v-on:click.prevent='unblock(row.key, ind, $event)' v-if='row.blocked === true') UnBlock
+                                            button.btn.btn-primary.btn-sm(type="button", v-on:click.prevent='block(row.key, ind, $event)' v-else ) Block
