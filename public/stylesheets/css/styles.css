@@ -483,9 +483,8 @@ header .intro-section .buttons {
 }
 
 .app-brief .phone-image {
-    max-width: 350px;
+    max-width: 100%;
     margin: auto;
-    margin-bottom: 50px;
 }
 
 .app-brief .phone-image img {
@@ -725,7 +724,7 @@ object {
 }
 
 .download .download-container {
-    padding-bottom: 80px;
+    padding-bottom: 30px;
 }
 
 .download .subscription-form-container {
@@ -854,8 +853,7 @@ footer .copyright {
 }
 .right-store-icon{
     display: inline-block;
-    width: 46%;
-    float: right;
+    width: 50%;
 }
 .left-store-icon img, .right-store-icon img{
     width: 70%;
