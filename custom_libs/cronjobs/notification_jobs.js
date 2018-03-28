@@ -2,8 +2,8 @@ const _ = require('lodash');
 const moment = require('moment');
 
 const admin = require("firebase-admin");
-const conf = require("../config/private");
-const serviceAccount = require("../config/serviceAccountKey.json");
+const conf = require("../../config/private");
+const serviceAccount = require("../../config/serviceAccountKey.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: conf.config_fb.databaseURL

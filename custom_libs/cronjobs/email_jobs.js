@@ -1,18 +1,18 @@
-let func = require('./func');
+let func = require('./../func');
 let moment = require('moment');
 let pug = require('pug');
 let fs = require('fs');
 
-let config = require('../config/private.json');
+let config = require('../../config/private.json');
 
 let nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport(config.smtp);
 
 let admin = require("firebase-admin");
-let serviceAccount = require("../config/serviceAccountKey.json");
+let serviceAccount = require("../../config/serviceAccountKey.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: require('../config/private.json').config_fb.databaseURL
+    databaseURL: require('../../config/private.json').config_fb.databaseURL
 });
 let db = admin.database();
 let user_req_invoices = db.ref("user_request_invoices");

@@ -420,29 +420,8 @@ html(lang='en')
           SCREENSHOTS
           ==============================
         section#screenshot-section.screenshots.deep-dark-bg
-            .container
-                // SECTION HEADER
-                .section-header.wow.fadeIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
-                    // SECTION TITLE
-                    h2.white-text How to order a delivery
-                    .colored-line
-                    .section-description
-                        | Get your parcel delivered in just 4 simple steps
-                    .colored-line
-                // /END SECTION HEADER
-                .row.wow.bounceIn.animated(data-wow-offset='10', data-wow-duration='1.5s')
-                    #screenshots.owl-carousel.owl-theme
-                        .shot
-                            a(href='/images/screenshots/screen1.jpeg', data-lightbox-gallery='screenshots-gallery')
-                                img(src='images/screenshots/screen1.jpeg', alt='Screenshot')
-                        .shot
-                            a(href='/images/screenshots/screen2.jpeg', data-lightbox-gallery='screenshots-gallery')
-                                img(src='images/screenshots/screen2.jpeg', alt='Screenshot')
-                        .shot
-                            a(href='/images/screenshots/screen3.jpeg', data-lightbox-gallery='screenshots-gallery')
-                                img(src='images/screenshots/screen3.jpeg', alt='Screenshot')
-                    // /END SCREENSHOTS
-                // /END ROW
+            video.wow.fadeIn.animated(src="/video/how_to_order.mp4" autoplay loop)
+                | Your browser does not support the video tag.
             // /END CONTAINER
         // /END SCREENSHOTS SECTION
         //

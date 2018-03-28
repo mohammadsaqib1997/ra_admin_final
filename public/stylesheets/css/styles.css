@@ -637,7 +637,11 @@ object {
 
 .screenshots {
     padding-top: 80px;
-    padding-bottom: 120px;
+    padding-bottom: 80px;
+}
+
+.screenshots video {
+    width: 100%;
 }
 
 .screenshots .shot {

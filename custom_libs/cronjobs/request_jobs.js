@@ -1,11 +1,11 @@
-var func = require('./func');
+var func = require('./../func');
 var moment = require('moment');
 
 var admin = require("firebase-admin");
-var serviceAccount = require("../config/serviceAccountKey.json");
+var serviceAccount = require("../../config/serviceAccountKey.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: require('../config/private.json').config_fb.databaseURL
+    databaseURL: require('../../config/private.json').config_fb.databaseURL
 });
 var db = admin.database();
 var user_active_req_ref = db.ref("user_active_requests");
@@ -24,7 +24,7 @@ var complete_requests_ref = db.ref("complete_requests");
 //topics
 var allDrivers = "AllDrivers";
 
-var config = require("../config/private.json").nexmo;
+var config = require("../../config/private.json").nexmo;
 var Nexmo = require("nexmo");
 var nexmo = new Nexmo({
     apiKey: config.api_key,
