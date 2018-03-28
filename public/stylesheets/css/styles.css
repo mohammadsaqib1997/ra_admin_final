@@ -203,8 +203,8 @@ h1 {
 }
 
 h2 {
-    font-size: 3.125rem;
-    line-height: 4.063rem;
+    font-size: 2rem;
+    line-height: 3.063rem;
 }
 
 h3 {
@@ -413,7 +413,7 @@ header .intro-section .buttons {
 
 .features .features-left {
     text-align: right;
-    margin-top: 26px;
+    margin-top: 50px;
     margin-bottom: 80px;
 }
 
@@ -424,7 +424,7 @@ header .intro-section .buttons {
 
 .features .features-right {
     text-align: left;
-    margin-top: 26px;
+    margin-top: 50px;
     margin-bottom: 80px;
 }
 
@@ -484,7 +484,7 @@ header .intro-section .buttons {
 
 .app-brief .phone-image {
     max-width: 100%;
-    margin: auto;
+    margin: 0 70px;
 }
 
 .app-brief .phone-image img {
@@ -622,7 +622,7 @@ object {
 }
 
 .services .single-service .service-icon {
-    font-size: 80px;
+    font-size: 4rem;
 }
 
 .services .single-service h3 {
@@ -715,6 +715,7 @@ object {
 -----------------------------------------*/
 
 .download {
+    text-align: left;
     color: #ffffff;
 }
 
@@ -729,6 +730,7 @@ object {
 
 .download .subscription-form-container {
     padding-bottom: 80px;
+    margin-top: 30px;
 }
 
 .download .subscription-form .input-box {
@@ -753,8 +755,29 @@ object {
 }
 
 .download h2 {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     margin-top: 0px;
+}
+
+.download .social-icons {
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.download .social-icons li {
+    display: inline-block;
+    margin: 5px;
+}
+
+.download .social-icons li a {
+    font-size: 30px;
+    color: #fff;
+}
+
+@media (max-width: 991px) {
+    .download {
+        text-align: center;
+    }
 }
 
 /*---------------------------------------
@@ -825,26 +848,9 @@ footer .contact-box .expanded-contact-form .textarea-box:focus,     {
     color: #FFF;
 }
 
-footer .social-icons {
-    margin-top: 30px;
-    border-bottom: 1px solid #111111;
-    padding-bottom: 50px;
-}
-
-footer .social-icons li {
-    display: inline-block;
-    margin: 5px;
-}
-
-footer .social-icons li a {
-    font-size: 30px;
-    color: #636363;
-}
-
 footer .copyright {
     color: #808080;
-    padding-top: 10px;
-    margin-bottom: 50px;
+    margin: 30px 0;
 }
 .left-store-icon{
     display: inline-block;
@@ -862,6 +868,23 @@ footer .copyright {
     clear: both;
 }
 
-.f_logo{
-    margin-top: 40px;
+@media (min-width: 992px) {
+    .mr-100-md {
+        margin-right: 100px
+    }
+
+    .text-right-md{
+        text-align: right;
+    }
+
+    .download .subscription-form .input-box {
+        display: block;
+        margin-left: auto;
+    }
+
+    .download .subscription-form .btn {
+        display: block;
+        margin-left: auto;
+        margin-right: 0px;
+    }
 }

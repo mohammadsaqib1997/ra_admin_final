@@ -131,9 +131,9 @@ html(lang='en')
                                 img(src='/images/roadio_logo_web.png', alt='')
                     // /END ONLY LOGO ON HEADER
                     .row
-                        .col-md-8.col-md-offset-2
+                        .col-md-8
                             // HEADING AND BUTTONS
-                            .intro-section
+                            .intro-section.text-left
                                 // WELCOM MESSAGE
                                 h2.intro Saman bhejna ab hua asan
                                     br
@@ -261,7 +261,7 @@ html(lang='en')
                     // PHONES IMAGE
                     .col-md-6.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s')
                         .phone-image
-                            img(src='/images/become_roadio.jpg', alt='')
+                            img(src='/images/become_roadio.png', alt='')
                     // RIGHT SIDE WITH BRIEF
                     .col-md-6.left-align.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s')
                         // SECTION TITLE
@@ -313,7 +313,7 @@ html(lang='en')
                     // PHONES IMAGE
                     .col-md-6.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s')
                         .phone-image
-                            img(src='/images/become_roadio.jpg', alt='')
+                            img(src='/images/become_roadio.png', alt='')
                     // /END PHONES IMAGE
                 // /END ROW
             // /END CONTAINER
@@ -453,24 +453,31 @@ html(lang='en')
             .color-overlay
                 .container
                     .row
-                        .col-md-8.col-md-offset-2
-                            // DOWNLOAD BUTTONS AREA
-                            h2.text-center ANY TIME, ANY PLACE
-                            p.text-center Whether it’s a book or a bed, use RoadioApp to send your stuff. Cheap, fun, safe and environmental.
+                        .col-md-6
+                            h2 ANY TIME, ANY PLACE
+                            p.mr-100-md Whether it’s a book or a bed, use RoadioApp to send your stuff. Cheap, fun, safe and environmental.
                             .download-container
                                 h2.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s') Download the app on
-                                // BUTTONS
                                 .buttons.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s')
                                     a.right-store-icon(href='https://play.google.com/store/apps/details?id=com.roadioapp.roadioappuser' target="_blank")
                                         img(src='/images/play_store.png')
-                                // /END BUTTONS
-                            // END OF DOWNLOAD BUTTONS AREA
+                            
+                            ul.social-icons
+                                li
+                                    a(href='https://www.facebook.com/RoadioApp-271823006566712/' target="_blank")
+                                        i.social_facebook_square
+                                li
+                                    a(href='https://www.instagram.com/roadioapp' target="_blank")
+                                        i.social_instagram_square
+                                li
+                                    a(href='https://twitter.com/Roadioapppak' target="_blank")
+                                        i.social_twitter_square
+                                
+                        .col-md-6.text-right-md
+                            img.responsive-img.f_logo(src='/images/roadio_logo_web.png', alt='LOGO')
+
                             .subscription-form-container
                                 h2.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s') Subscribe Now!
-                                //
-                                  =====================
-                                  MAILCHIMP FORM STARTS
-                                  =====================
                                 form.subscription-form.mailchimp.form-inline.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s', role='form')
                                     // SUBSCRIPTION SUCCESSFUL OR ERROR MESSAGES
                                     h4.subscription-success
@@ -479,21 +486,6 @@ html(lang='en')
                                     input#subscriber-email.form-control.input-box(type='email', name='email', placeholder='Your Email')
                                     // SUBSCRIBE BUTTON
                                     button#subscribe-button.btn.btn-default.standard-button(type='submit') Subscribe
-                                // /END MAILCHIMP FORM STARTS
-                                //
-                                  =====================
-                                  LOCAL TXT FORM STARTS
-                                  =====================
-                                //
-                                  THIS FORM IS COMMENTED TO HIDE
-                                  <form class="subscription-form form-inline wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s" id="subscribe" role="form">
-                                  <h4 class="subscription-success"><i class="icon_check"></i> Thank you! We will notify you soon.</h4>
-                                  <h4 class="subscription-error">Something Wrong!</h4>
-                                  <input type="email" name="email" id="subscriber-email" placeholder="Your Email" class="form-control input-box">
-                                  <button type="submit" id="subscribe-button" class="btn btn-default standard-button">Subscribe</button>
-                                  </form>
-                                // / LOCAL TXT SAVING FORM END
-
                         // END COLUMN
                     // END ROW
                 // /END CONTAINER
@@ -505,20 +497,6 @@ html(lang='en')
           ==============================
         footer
             .container
-
-                // LOGO
-                img.responsive-img.f_logo(src='/images/roadio_logo_web.png', alt='LOGO')
-                // SOCIAL ICONS
-                ul.social-icons
-                    li
-                        a(href='https://www.facebook.com/RoadioApp-271823006566712/' target="_blank")
-                            i.social_facebook_square
-                    li
-                        a(href='https://www.instagram.com/roadioapp' target="_blank")
-                            i.social_instagram_square
-                    li
-                        a(href='https://twitter.com/Roadioapppak' target="_blank")
-                            i.social_twitter_square
                 // COPYRIGHT TEXT
                 p.copyright
                     | ©2017 Roadioapp, All Rights Reserved
