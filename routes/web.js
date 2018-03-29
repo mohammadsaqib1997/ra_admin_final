@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var admin = require('firebase-admin');
 var db = admin.database();
-var webName = "RoadioApp";
 var userRef = db.ref('users');
 var bcrypt = require("bcrypt-nodejs");
 var saltRounds = 10;
 var csrf = require("csurf");
+
+var webName = "RoadioApp";
 
 var twilioConf = require('../config/private').twilio;
 var LookupsClient = require('twilio').LookupsClient;
@@ -20,18 +21,18 @@ var storage = require('@google-cloud/storage')(config_gc);
 var bucket = storage.bucket('radioapp-a8558.appspot.com');
 
 router.get('/', function (req, res, next) {
-    res.render('pages/home', {title: webName + ' | Home'});
+    res.render('new_pages/home', {title: webName + ' | Home', tag: 'home'});
 });
 router.get('/partner', csrf(), function (req, res, next) {
-    res.render('pages/partner', {csrf: req.csrfToken()});
+    res.render('new_pages/partner', {csrf: req.csrfToken(), title: webName + ' | Partner'});
 });
 
 router.get('/privacy', function (req, res, next) {
-    res.render('pages/privacy');
+    res.render('new_pages/privacy', {title: webName + ' | Privacy'});
 });
 
 router.get('/faqs', function (req, res, next) {
-    res.render('pages/faqs');
+    res.render('new_pages/faqs', {title: webName + ' | FAQs'});
 });
 
 router.post('/sec_1_check', csrf(), function (req, res, next) {

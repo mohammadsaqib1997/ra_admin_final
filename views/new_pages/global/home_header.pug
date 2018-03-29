@@ -1,0 +1,39 @@
+//
+    =========================
+    HEADER
+    ==============================
+header#home.header
+    // COLOR OVER IMAGE
+    .color-overlay
+        // To make header full screen. Use .full-screen class with color overlay. Example: <div class="color-overlay full-screen">
+        // STICKY NAVIGATION
+        include nav.pug
+        // /END STICKY NAVIGATION
+        if tag && tag === "home"
+            // CONTAINER
+            .container
+                // ONLY LOGO ON HEADER
+                .only-logo
+                    .navbar(style='padding-bottom:0px;')
+                        .navbar-header
+                            img(src='/images/roadio_logo_web.png', alt='')
+                // /END ONLY LOGO ON HEADER
+                .row
+                    .col-md-8
+                        // HEADING AND BUTTONS
+                        .intro-section.text-left
+                            // WELCOM MESSAGE
+                            h2.intro Saman bhejna ab hua asan
+                                br
+                                | Car, Suzuki ya Truck sirf ek button ki duri per
+                            h5 Available on App Store and Play Store
+                            // BUTTON
+                            #download-button.buttons
+                                a.btn.btn-default.btn-lg.standard-button(href='#download')
+                                    i.icon-app-download
+                                    | Download App
+                            // /END BUTTONS
+                        // /END HEADNING AND BUTTONS
+                // /END ROW
+            // /END CONTAINER
+        // /END COLOR OVERLAY
