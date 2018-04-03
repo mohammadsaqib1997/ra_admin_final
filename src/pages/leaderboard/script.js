@@ -9,7 +9,7 @@ export default {
         'table_comp': tableComp
     },
     mounted() {
-        this.dataByMonth(_.find(this.months_sel, {unix: this.selected_m}).mm, this.data, 'loader');
+        this.dataByMonth(_.find(this.months_sel, {unix: this.selected_m}).mm);
     },
     data() {
         const db = firebase.database();
@@ -37,11 +37,11 @@ export default {
             this.loader = true;
             this.data = [];
             this.top3Images = ["/images/avatar.png", "/images/avatar.png", "/images/avatar.png"];
-            this.dataByMonth(_.find(this.months_sel, {unix: val}).mm, this.data, 'loader');
+            this.dataByMonth(_.find(this.months_sel, {unix: val}).mm);
         },
         loader (val) {
             let self = this;
-            if (val === false) {
+            if (val === false && this.data.length > 0) {
                 this.data = _.orderBy(this.data, ['points', 'time.m', 'rating', 'earning', 'bids'], ['desc', 'desc', 'desc', 'desc', 'desc']);
                 this.profileImgUrlSet([this.data[0].id, this.data[1].id, this.data[2].id]);
             }
@@ -95,7 +95,7 @@ export default {
         async comJobBid (req_key, driver_key, m_moment) {
             let earn = 0;
             await this.bidRef.child(req_key+"/"+driver_key).once('value', function (bid_snap) {
-                if(moment(bid_snap.val().first_bid_time).format("M") === m_moment.format("M")) {
+                if(moment(bid_snap.val().first_bid_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
                     earn = parseInt(bid_snap.val().amount);
                 }
             });
@@ -103,27 +103,91 @@ export default {
         },
         async driverBids (driver_key, m_moment) {
             let count = 0;
-            await this.bidRef.once('value', function (bid_snap) {
+            await this.bidRef.once('value', async function (bid_snap) {
+                console.log(bid_snap.val())
                 if(bid_snap.val() !== null){
-                    let res = _.filter(bid_snap.val(), driver_key);
+                    await Promise.all(_.map(bid_snap.val(), async (row, key) => {
+                        for (let [i_key, i_val] of Object.entries(row)) {
+                            if(moment(i_val.first_bid_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
+                                count++;
+                            }
+                        }
+                    }))
+
+
+                    /* let res = _.filter(bid_snap.val(), driver_key);
                     if(res.length > 0) {
                         for (let [p_key, p_val] of Object.entries(res)) {
                             for (let [i_key, i_val] of Object.entries(p_val)) {
-                                if(moment(i_val.first_bid_time).format("M") === m_moment.format("M")) {
+                                if(moment(i_val.first_bid_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
                                     count++;
                                 }
                             }
                         }
-                    }
+                    } */
                 }
             });
             return count;
         },
-        dataByMonth (m_moment, setData, loader) {
+        async dataByMonth (m_moment) {
             const self = this;
-            // hit db callback --users
-            self.driverRef.once('value', function (snap) {
-                if (snap.val() !== null) {
+            let  grabLeaderData = []
+
+            // drivers snapshot
+            let driversSnap = await self.driverRef.once('value');
+            if (driversSnap.val() !== null) {
+                await Promise.all(_.map(driversSnap.val(), async (driver, uid) => {
+                    // check active drivers
+                    if ( driver.status === 1 ) {
+                        let rowData = {};
+
+                        // default point
+                        rowData['points'] = 0
+
+                        // default time
+                        let defDuration = moment.duration();
+                        rowData['time'] = {m: (defDuration.get('h')*60) + defDuration.get("m")};
+
+                        // default rating
+                        rowData['rating'] = 0;
+
+                        // driver data
+                        rowData['id'] = uid
+                        rowData['name'] = driver.first_name + " " + driver.last_name
+
+                        // ----- Database triggers -----
+
+                        // driver time session snapshot
+                        let driverSessionSnap = await self.sessionsRef.orderByChild("userID").equalTo(uid).once('value')
+                        if (driverSessionSnap.val() !== null) {
+                            await Promise.all(_.map(driverSessionSnap.val(), async (row, key) => {
+                                if(row.hasOwnProperty("loginTime") && row.hasOwnProperty("logoutTime")){
+                                    if(moment(row.loginTime).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
+                                        defDuration.add(moment.duration(moment(row.logoutTime).diff(moment(row.loginTime))));
+                                    }
+                                }
+                            }))
+                            rowData['time'] = {m: (defDuration.get('h')*60) + defDuration.get("m")};
+                            rowData['points'] += Math.round(rowData.time.m/100);
+                        }
+
+                        // driver jobs complete snapshot
+                        let driverJobsCompleteSnap = await self.completeReqRef.orderByChild("driver_uid").equalTo(uid).once('value')
+                        if (driverJobsCompleteSnap.val() !== null) {
+                            console.log(driverJobsCompleteSnap.val())
+                        }
+
+                    }
+                }))
+
+                console.log(grabLeaderData.length)
+
+                self.loader = false
+            }else{
+                self.loader = false
+            }
+
+            /* if (snap.val() !== null) {
                     const all_snap = snap.val();
                     let new_snap = _.filter(all_snap, {status: 1});
                     let ind = 0;
@@ -141,7 +205,7 @@ export default {
                                 sess_snap.forEach(function (sess_item) {
                                     let sess_item_val = sess_item.val();
                                     if(sess_item_val.hasOwnProperty("loginTime") && sess_item_val.hasOwnProperty("logoutTime")){
-                                        if(moment(sess_item_val.loginTime).format('M') === m_moment.format('M')) {
+                                        if(moment(sess_item_val.loginTime).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
                                             defDuration.add(moment.duration(moment(sess_item_val.logoutTime).diff(moment(sess_item_val.loginTime))));
                                         }
                                     }
@@ -150,12 +214,14 @@ export default {
                             grabData['time'] = {m: (defDuration.get('h')*60) + defDuration.get("m")};
                             grabData['points'] += Math.round(grabData.time.m/100);
                             // hit db callback --complete_requests
+
+
                             self.completeReqRef.orderByChild("driver_uid").equalTo(driver_key).once('value', function (creq_snap) {
                                 // complete jobs and rating getters
                                 let rating_count = 0;
                                 if(creq_snap.val() !== null){
                                     creq_snap.forEach(function (c_job) {
-                                        if(moment(c_job.val().complete_time).format('M') === m_moment.format('M')) {
+                                        if(moment(c_job.val().complete_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
                                             rating_count += c_job.val().rating;
                                             grabData['points'] += self.ratingPoints(c_job.val().rating);
                                         }
@@ -179,8 +245,9 @@ export default {
                     });
                 }else{
                     self.complete_pros(null, 1, 1, setData, loader);
-                }
-            });
+                } */
+
+            
         }
     }
 }

@@ -1,13 +1,13 @@
 aside.right-side
     section.content-header
-        h1 Completed Requests
+        h1 Canceled Requests
         ol.breadcrumb
             li
                 router-link(to='/')
                     i.fa.fa-dashboard
                     |  Dashboard
             li Deliveries
-            li Completed Requests
+            li Canceled Requests
     section.content
         .row
             .col-xs-12
@@ -36,28 +36,22 @@ aside.right-side
                                                     th Date
                                                     th Request No.
                                                     th Client Name
-                                                    th Driver Name
                                                     th Origin
                                                     th Destination
                                                     th Distance
                                                     th Duration
                                                     th Required Vehicle
-                                                    th Driver Vehicle
-                                                    th Parcel Rating
                                             template(slot="tbody")
                                                 tr(v-for='(row, ind) in today')
                                                     td {{ ind+1 }}
                                                     td {{ dateFormat(row.reqData.createdAt) }}
                                                     td {{ row.reqData.id }}
                                                     td {{ row.clientData.first_name +" "+ row.clientData.last_name }}
-                                                    td {{ row.driverData.first_name +" "+ row.driverData.last_name }}
                                                     td {{ row.reqData.orgText }}
                                                     td {{ row.reqData.desText }}
                                                     td {{ row.reqData.disText }}
                                                     td {{ row.reqData.durText }}
                                                     td {{ row.reqData.vecType }}
-                                                    td {{ row.driverData.vehicle }}
-                                                    td {{ row.compReqData.rating }}
                             
                             div.tab-pane#week(role='tabpanel')
                                 div.table-responsive
@@ -73,28 +67,22 @@ aside.right-side
                                                     th Date
                                                     th Request No.
                                                     th Client Name
-                                                    th Driver Name
                                                     th Origin
                                                     th Destination
                                                     th Distance
                                                     th Duration
                                                     th Required Vehicle
-                                                    th Driver Vehicle
-                                                    th Parcel Rating
                                             template(slot="tbody")
                                                 tr(v-for='(row, ind) in week')
                                                     td {{ ind+1 }}
                                                     td {{ dateFormat(row.reqData.createdAt) }}
                                                     td {{ row.reqData.id }}
                                                     td {{ row.clientData.first_name +" "+ row.clientData.last_name }}
-                                                    td {{ row.driverData.first_name +" "+ row.driverData.last_name }}
                                                     td {{ row.reqData.orgText }}
                                                     td {{ row.reqData.desText }}
                                                     td {{ row.reqData.disText }}
                                                     td {{ row.reqData.durText }}
                                                     td {{ row.reqData.vecType }}
-                                                    td {{ row.driverData.vehicle }}
-                                                    td {{ row.compReqData.rating }}
                             
                             div.tab-pane#all(role='tabpanel')
                                 div.table-responsive
@@ -110,25 +98,19 @@ aside.right-side
                                                     th Date
                                                     th Request No.
                                                     th Client Name
-                                                    th Driver Name
                                                     th Origin
                                                     th Destination
                                                     th Distance
                                                     th Duration
                                                     th Required Vehicle
-                                                    th Driver Vehicle
-                                                    th Parcel Rating
                                             template(slot="tbody")
                                                 tr(v-for='(row, ind) in all')
                                                     td {{ ind+1 }}
                                                     td {{ dateFormat(row.reqData.createdAt) }}
                                                     td {{ row.reqData.id }}
                                                     td {{ row.clientData.first_name +" "+ row.clientData.last_name }}
-                                                    td {{ row.driverData.first_name +" "+ row.driverData.last_name }}
                                                     td {{ row.reqData.orgText }}
                                                     td {{ row.reqData.desText }}
                                                     td {{ row.reqData.disText }}
                                                     td {{ row.reqData.durText }}
                                                     td {{ row.reqData.vecType }}
-                                                    td {{ row.driverData.vehicle }}
-                                                    td {{ row.compReqData.rating }}

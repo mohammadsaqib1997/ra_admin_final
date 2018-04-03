@@ -173,7 +173,7 @@
                                 if (selDriver.status === 1) {
                                     self.driversData.push({
                                         val: row,
-                                        option: selDriver.mob_no + " ~ " + selDriver.first_name + " " + selDriver.last_name
+                                        option: selDriver.mob_no + " ~ " + selDriver.vehicle + " ~ " + selDriver.first_name + " " + selDriver.last_name
                                     });
                                 }
                             });

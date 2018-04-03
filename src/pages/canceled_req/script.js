@@ -15,12 +15,12 @@ export default {
         const db = firebase.database();
         self.userRef = db.ref('/users');
         self.userReqRef = db.ref('/user_requests');
-        self.completeReqRef = db.ref('/complete_requests');
 
-        self.completeRequestListener();
+        self.cancelRequestListener();
+
     },
     destroyed() {
-        this.completeReqRef.off();
+        this.userReqRef.off();
     },
     data: function () {
         return {
@@ -30,7 +30,6 @@ export default {
             today: [],
             userRef: null,
             userReqRef: null,
-            completeReqRef: null,
         }
     },
     methods: {
@@ -46,31 +45,30 @@ export default {
             }
             return grabDates
         },
-        async completeRequestListener() {
-            const self = this;
-            // snap means total number of snapshot in complete request list
-            await self.completeReqRef.on('value', async function (snap) {
-                self.dataLoad = true;
-                self.all = [];
-                self.week = [];
-                self.today = [];
+        async cancelRequestListener() {
+            const self = this
 
-                let grabData = [];
+            await self.userReqRef.on('value', async function (snap) {
+                self.dataLoad = true
+                self.all = []
+                self.week = []
+                self.today = []
+
+                let grabData = []
 
                 if (snap.numChildren() > 0) {
+                    //console.log(snap.val())
 
-                    // compReqSnap means inner item in complete request list
-                    await Promise.all(_.map(snap.val(), async (compReqData, key) => {
-                        let reqSnap = await self.userReqRef.child(compReqData.client_uid + "/" + key).once('value')
-                        let clientSnap = await self.userRef.child(compReqData.client_uid).once('value')
-                        let driverSnap = await self.userRef.child(compReqData.driver_uid).once('value')
-
-                        grabData.push({
-                            compReqData,
-                            reqData: reqSnap.val(),
-                            clientData: clientSnap.val(),
-                            driverData: driverSnap.val()
-                        });
+                    await Promise.all(_.map(snap.val(), async (userReqs, key) => {
+                        await Promise.all(_.map(userReqs, async (reqs) => {
+                            if (reqs.hasOwnProperty("canceledAt")) {
+                                let clientSnap = await self.userRef.child(key).once('value')
+                                grabData.push({
+                                    clientData: clientSnap.val(),
+                                    reqData: reqs
+                                })
+                            }
+                        }))
                     }))
 
                     // sorted here desc/asc
@@ -103,7 +101,7 @@ export default {
                 } else {
                     self.dataLoad = false;
                 }
-            });
+            })
         }
     }
 }
