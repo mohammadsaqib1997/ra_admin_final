@@ -9,15 +9,15 @@ export default {
         'table_comp': tableComp
     },
     mounted() {
-        this.dataByMonth(_.find(this.months_sel, {unix: this.selected_m}).mm);
+        this.dataByMonth(_.find(this.months_sel, { unix: this.selected_m }).mm);
     },
     data() {
         const db = firebase.database();
         const storage = firebase.storage();
         let months_sel = [];
-        for (let i=0; i<12; i++) {
+        for (let i = 0; i < 12; i++) {
             let date = moment().subtract(i, 'M');
-            months_sel.push({date: date.format("MMM YYYY"), unix: date.format("x"), mm: date})
+            months_sel.push({ date: date.format("MMM YYYY"), unix: date.format("x"), mm: date })
         }
         return {
             driverRef: db.ref("users").orderByChild("type").equalTo("driver"),
@@ -33,13 +33,14 @@ export default {
         }
     },
     watch: {
-        selected_m (val) {
+        selected_m(val) {
             this.loader = true;
             this.data = [];
+            this.load_percent = 0
             this.top3Images = ["/images/avatar.png", "/images/avatar.png", "/images/avatar.png"];
-            this.dataByMonth(_.find(this.months_sel, {unix: val}).mm);
+            this.dataByMonth(_.find(this.months_sel, { unix: val }).mm);
         },
-        loader (val) {
+        loader(val) {
             let self = this;
             if (val === false && this.data.length > 0) {
                 this.data = _.orderBy(this.data, ['points', 'time.m', 'rating', 'earning', 'bids'], ['desc', 'desc', 'desc', 'desc', 'desc']);
@@ -48,18 +49,8 @@ export default {
         }
     },
     methods: {
-        complete_pros (push_row, ind, tot_length, setData, loader) {
-            if(push_row !== null){
-                setData.push(push_row);
-                ind++;
-            }
-            if(ind === tot_length){
-                this[loader] = false;
-            }
-            return ind;
-        },
-        ratingPoints (rate) {
-            switch (rate){
+        ratingPoints(rate) {
+            switch (rate) {
                 case 5:
                     return 10;
                 case 4:
@@ -73,72 +64,29 @@ export default {
             }
             return 0;
         },
-        profileImgUrlSet (uids) {
+        profileImgUrlSet(uids) {
             let self = this;
             uids.forEach(function (val, ind) {
-                self.profileImgSRef.child(val+'.jpg').getDownloadURL().then(function (res) {
+                self.profileImgSRef.child(val + '.jpg').getDownloadURL().then(function (res) {
                     self.$set(self.top3Images, ind, res);
-                }).catch(function (err) {});
+                }).catch(function (err) { });
             });
         },
-        async driverEarning (com_reqs_snap, driver_key, m_moment) {
+        async dataByMonth(m_moment) {
             const self = this;
-            let earnings = 0;
-            if(com_reqs_snap.numChildren() > 0){
-                const keys = Object.keys(com_reqs_snap.val());
-                for (let key of keys) {
-                    earnings += await self.comJobBid(key, driver_key, m_moment);
-                }
-            }
-            return earnings;
-        },
-        async comJobBid (req_key, driver_key, m_moment) {
-            let earn = 0;
-            await this.bidRef.child(req_key+"/"+driver_key).once('value', function (bid_snap) {
-                if(moment(bid_snap.val().first_bid_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
-                    earn = parseInt(bid_snap.val().amount);
-                }
-            });
-            return earn;
-        },
-        async driverBids (driver_key, m_moment) {
-            let count = 0;
-            await this.bidRef.once('value', async function (bid_snap) {
-                console.log(bid_snap.val())
-                if(bid_snap.val() !== null){
-                    await Promise.all(_.map(bid_snap.val(), async (row, key) => {
-                        for (let [i_key, i_val] of Object.entries(row)) {
-                            if(moment(i_val.first_bid_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
-                                count++;
-                            }
-                        }
-                    }))
+            let grabLeaderData = []
 
-
-                    /* let res = _.filter(bid_snap.val(), driver_key);
-                    if(res.length > 0) {
-                        for (let [p_key, p_val] of Object.entries(res)) {
-                            for (let [i_key, i_val] of Object.entries(p_val)) {
-                                if(moment(i_val.first_bid_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
-                                    count++;
-                                }
-                            }
-                        }
-                    } */
-                }
-            });
-            return count;
-        },
-        async dataByMonth (m_moment) {
-            const self = this;
-            let  grabLeaderData = []
+            // drivers place bids snapshot
+            const bidsSnap = await self.bidRef.once('value')
+            const bidsData = (bidsSnap.val() !== null) ? bidsSnap.val() : {}
 
             // drivers snapshot
             let driversSnap = await self.driverRef.once('value');
             if (driversSnap.val() !== null) {
                 await Promise.all(_.map(driversSnap.val(), async (driver, uid) => {
-                    // check active drivers
-                    if ( driver.status === 1 ) {
+
+                    // check active driver
+                    if (driver.status === 1) {
                         let rowData = {};
 
                         // default point
@@ -146,10 +94,16 @@ export default {
 
                         // default time
                         let defDuration = moment.duration();
-                        rowData['time'] = {m: (defDuration.get('h')*60) + defDuration.get("m")};
+                        rowData['time'] = { m: (defDuration.get('h') * 60) + defDuration.get("m") };
 
                         // default rating
                         rowData['rating'] = 0;
+
+                        // default bid count
+                        rowData['bids'] = 0;
+
+                        // default earning
+                        rowData['earning'] = 0
 
                         // driver data
                         rowData['id'] = uid
@@ -161,93 +115,65 @@ export default {
                         let driverSessionSnap = await self.sessionsRef.orderByChild("userID").equalTo(uid).once('value')
                         if (driverSessionSnap.val() !== null) {
                             await Promise.all(_.map(driverSessionSnap.val(), async (row, key) => {
-                                if(row.hasOwnProperty("loginTime") && row.hasOwnProperty("logoutTime")){
-                                    if(moment(row.loginTime).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
+                                if (row.hasOwnProperty("loginTime") && row.hasOwnProperty("logoutTime")) {
+                                    if (moment(row.loginTime).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
                                         defDuration.add(moment.duration(moment(row.logoutTime).diff(moment(row.loginTime))));
                                     }
                                 }
                             }))
-                            rowData['time'] = {m: (defDuration.get('h')*60) + defDuration.get("m")};
-                            rowData['points'] += Math.round(rowData.time.m/100);
+                            rowData['time'] = { m: (defDuration.get('h') * 60) + defDuration.get("m") };
+                            rowData['points'] += Math.round(rowData.time.m / 100);
                         }
+
+                        // grab driver bids
+                        let driver_bids = []
+                        await Promise.all(_.map(bidsData, async (r_bids_val, r_bids_key) => {
+                            await Promise.all(_.map(r_bids_val, async (f_obj_val, f_obj_key) => {
+                                if (f_obj_key === uid && f_obj_val.hasOwnProperty('first_bid_time')) {
+                                    if (moment(f_obj_val.first_bid_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
+                                        let push_obj = f_obj_val
+                                        push_obj['req_id'] = r_bids_key
+                                        driver_bids.push(push_obj)
+                                    }
+                                }
+                            }))
+                        }))
+                        rowData['bids'] = driver_bids.length;
+                        rowData['points'] += driver_bids.length;
 
                         // driver jobs complete snapshot
                         let driverJobsCompleteSnap = await self.completeReqRef.orderByChild("driver_uid").equalTo(uid).once('value')
                         if (driverJobsCompleteSnap.val() !== null) {
-                            console.log(driverJobsCompleteSnap.val())
-                        }
+                            // grab rating for completed jobs
+                            let rating_count = 0
+                            await Promise.all(_.map(driverJobsCompleteSnap.val(), async (c_job_val, c_job_key) => {
+                                if (moment(c_job_val.complete_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
+                                    rating_count += c_job_val.rating;
+                                    rowData['points'] += await self.ratingPoints(c_job_val.rating);
 
-                    }
-                }))
-
-                console.log(grabLeaderData.length)
-
-                self.loader = false
-            }else{
-                self.loader = false
-            }
-
-            /* if (snap.val() !== null) {
-                    const all_snap = snap.val();
-                    let new_snap = _.filter(all_snap, {status: 1});
-                    let ind = 0;
-                    new_snap.forEach(function (driver, l_ind) {
-                        const driver_key = _.findKey(all_snap, {status: 1, email: driver.email});
-                        let grabData = {};
-                        grabData['points'] = 0;
-                        grabData['id'] = driver_key;
-                        grabData['name'] = driver.first_name + " " + driver.last_name;
-                        // hit db callback --sessions
-                        self.sessionsRef.orderByChild("userID").equalTo(driver_key).once('value', function (sess_snap) {
-                            // time getters
-                            let defDuration = moment.duration();
-                            if(sess_snap.val() !== null){
-                                sess_snap.forEach(function (sess_item) {
-                                    let sess_item_val = sess_item.val();
-                                    if(sess_item_val.hasOwnProperty("loginTime") && sess_item_val.hasOwnProperty("logoutTime")){
-                                        if(moment(sess_item_val.loginTime).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
-                                            defDuration.add(moment.duration(moment(sess_item_val.logoutTime).diff(moment(sess_item_val.loginTime))));
+                                    // here find request bid price
+                                    if (driver_bids.length > 0) {
+                                        let f_req_p_bid = _.find(driver_bids, { 'req_id': c_job_key })
+                                        if (typeof f_req_p_bid !== 'undefined') {
+                                            rowData['earning'] = parseInt(f_req_p_bid.amount)
+                                            rowData['points'] += Math.round(parseInt(f_req_p_bid.amount) / 100);
                                         }
                                     }
-                                });
-                            }
-                            grabData['time'] = {m: (defDuration.get('h')*60) + defDuration.get("m")};
-                            grabData['points'] += Math.round(grabData.time.m/100);
-                            // hit db callback --complete_requests
-
-
-                            self.completeReqRef.orderByChild("driver_uid").equalTo(driver_key).once('value', function (creq_snap) {
-                                // complete jobs and rating getters
-                                let rating_count = 0;
-                                if(creq_snap.val() !== null){
-                                    creq_snap.forEach(function (c_job) {
-                                        if(moment(c_job.val().complete_time).format("MM/YYYY") === m_moment.format("MM/YYYY")) {
-                                            rating_count += c_job.val().rating;
-                                            grabData['points'] += self.ratingPoints(c_job.val().rating);
-                                        }
-                                    });
                                 }
-                                grabData['rating'] = rating_count;
-                                // complete jobs earnings getters
-                                self.driverEarning(creq_snap, driver_key, m_moment).then(function (res) {
-                                    grabData['earning'] = res;
-                                    grabData['points'] += Math.round(res/100);
-                                    // driver place bids getters
-                                    self.driverBids(driver_key, m_moment).then(function (res) {
-                                        grabData['bids'] = res;
-                                        grabData['points'] += res;
+                            }))
+                            rowData['rating'] = rating_count
+                        }
 
-                                        ind = self.complete_pros(grabData, ind, new_snap.length, setData, loader);
-                                    });
-                                });
-                            });
-                        });
-                    });
-                }else{
-                    self.complete_pros(null, 1, 1, setData, loader);
-                } */
-
-            
+                        // here is the end of grabing data
+                        grabLeaderData.push(rowData)
+                    }
+                }))
+                // here set the final data
+                self.data = grabLeaderData
+                self.loader = false
+            } else {
+                self.loader = false
+            }
         }
     }
 }
