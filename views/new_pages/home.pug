@@ -273,7 +273,7 @@ html(lang='en')
           =========================
           SCREENSHOTS
           ==============================
-        section#screenshot-section.screenshots.deep-dark-bg
+        section#screenshot-section.deep-dark-bg
             video.wow.fadeIn.animated(src="/video/how_to_order.mp4" autoplay loop)
                 | Your browser does not support the video tag.
             // /END CONTAINER
@@ -282,47 +282,7 @@ html(lang='en')
 
           DOWNLOAD NOW
           ==============================
-        section#download.download
-            .color-overlay
-                .container
-                    .row
-                        .col-md-6
-                            h2 ANY TIME, ANY PLACE
-                            p.mr-100-md Whether it’s a book or a bed, use RoadioApp to send your stuff. Cheap, fun, safe and environmental.
-                            .download-container
-                                h2.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s') Download the app on
-                                .buttons.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s')
-                                    a.right-store-icon(href='https://play.google.com/store/apps/details?id=com.roadioapp.roadioappuser' target="_blank")
-                                        img(src='/images/play_store.png')
-                            
-                            ul.social-icons
-                                li
-                                    a(href='https://www.facebook.com/RoadioApp-271823006566712/' target="_blank")
-                                        i.social_facebook_square
-                                li
-                                    a(href='https://www.instagram.com/roadioapp' target="_blank")
-                                        i.social_instagram_square
-                                li
-                                    a(href='https://twitter.com/Roadioapppak' target="_blank")
-                                        i.social_twitter_square
-                                
-                        .col-md-6.text-right-md
-                            img.responsive-img.f_logo(src='/images/roadio_logo_web.png', alt='LOGO')
-
-                            .subscription-form-container
-                                h2.wow.fadeInLeft.animated(data-wow-offset='10', data-wow-duration='1.5s') Subscribe Now!
-                                form.subscription-form.mailchimp.form-inline.wow.fadeInRight.animated(data-wow-offset='10', data-wow-duration='1.5s', role='form')
-                                    // SUBSCRIPTION SUCCESSFUL OR ERROR MESSAGES
-                                    h4.subscription-success
-                                    h4.subscription-error
-                                    // EMAIL INPUT BOX
-                                    input#subscriber-email.form-control.input-box(type='email', name='email', placeholder='Your Email')
-                                    // SUBSCRIBE BUTTON
-                                    button#subscribe-button.btn.btn-default.standard-button(type='submit') Subscribe
-                        // END COLUMN
-                    // END ROW
-                // /END CONTAINER
-            // /END COLOR OVERLAY
+            
         // /END DOWNLOAD SECTION
 
         include global/footer_bottom.pug
